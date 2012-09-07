@@ -14,4 +14,5 @@ Gem::Specification.new do |s|
   s.add_dependency "builder", ">= 2.0.0"
   s.add_dependency "json", ">= 1.7.5"
   s.add_dependency "rest-client", ">=1.6.7"
+  s.add_dependency "logger", ">=1.2.8"
 end

@@ -1,4 +1,4 @@
 require 'json'
 require 'rest-client'
 
-require 'insightly/base'
+require 'insightly/configuration'

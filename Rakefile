@@ -1,22 +1,16 @@
 require "rubygems"
-require "spec/rake/spectask"
-require "rake/rdoctask"
+require "rspec/core/rake_task"
+require "rake/task"
 
-task :default => %w[spec:unit spec:integration]
+task :default => :spec
 
 task :dev_console do
-  sh "irb -I lib -rubygems -r insightly -r env/development"
+  sh "irb -I lib -rubygems -r insightly"
 end
 
 desc "Run units"
-Spec::Rake::SpecTask.new("spec:unit") do |t|
-  t.spec_files = FileList["spec/unit/**/*_spec.rb"]
-end
+RSpec::Core::RakeTask.new('spec')
 
-desc "Run integration"
-Spec::Rake::SpecTask.new("spec:integration") do |t|
-  t.spec_files = FileList["spec/integration/**/*_spec.rb"]
-end
 
 task :gem do
   exec('gem build insightly.gemspec')

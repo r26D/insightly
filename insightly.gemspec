@@ -12,4 +12,6 @@ Gem::Specification.new do |s|
   s.has_rdoc = false
   s.files = Dir.glob ["README.md", "LICENSE", "{lib,spec}/**/*.rb", "lib/**/*.crt", "*.gemspec"]
   s.add_dependency "builder", ">= 2.0.0"
+  s.add_dependency "json", ">= 1.7.5"
+  s.add_dependency "rest-client", ">=1.6.7"
 end

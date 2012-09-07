@@ -11,6 +11,7 @@ require 'bundler/setup'  if File.exists?(ENV['BUNDLE_GEMFILE'])
 Bundler.require(:default, :testing) if defined?(Bundler)
 
 require "insightly"
+require File.expand_path(File.dirname(__FILE__) + "/../api_key")
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
   config.run_all_when_everything_filtered = true

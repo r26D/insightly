@@ -1,0 +1,3 @@
+#Put your API Here and rename the file as api_key.rb
+#Currently I don't know of a testing environment for Insighlty so it is always a live fire exercise
+INSIGHTLY_API_KEY = ""

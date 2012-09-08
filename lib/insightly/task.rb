@@ -1,3 +1,5 @@
+#METODO Find a way to link a task to an opportunity
+#METODO Add support for adding a comment to a task
 module Insightly
   class Task < Base
     URL_BASE = "Tasks"

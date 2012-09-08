@@ -1,3 +1,6 @@
+#METODO Fix the search by name
+#METODO Fix status checking
+#METODO fix the state change - so you can actually log a reason
 module Insightly
   class Opportunity < Base
     URL_BASE = "Opportunities"
@@ -37,10 +40,6 @@ module Insightly
               "RESPONSIBLE_USER_ID",
               "OPPORTUNITY_DETAILS"
 
-    def initialize(id = nil)
-
-      super
-    end
 
     def remote_id
       opportunity_id
@@ -59,73 +58,18 @@ module Insightly
     end
 
 
-    def contact_name
-      @data["OPPORTUNITY_FIELD_8"]
-    end
-
-    def contact_name=(value)
-      @data["OPPORTUNITY_FIELD_8"] = value
-    end
-
-    def company_name
-      @data["OPPORTUNITY_FIELD_7"]
-    end
-
-    def company_name=(value)
-      @data["OPPORTUNITY_FIELD_7"] = value
-    end
-
-    def organization
-      @data["OPPORTUNITY_FIELD_6"]
-    end
-
-    def organization=(value)
-      @data["OPPORTUNITY_FIELD_6"] = value
-    end
-
-    def plan
-      @data["OPPORTUNITY_FIELD_5"]
-    end
-
-    def plan=(value)
-      @data["OPPORTUNITY_FIELD_5"] = value
-    end
-
-    def timezone
-      @data["OPPORTUNITY_FIELD_4"]
-    end
-
-    def timezone=(value)
-      @data["OPPORTUNITY_FIELD_4"] = value
-    end
-
-    def phone_number
-      @data["OPPROTUNITY_FIELD_3"]
-    end
-
-    def phone_number=(value)
-      @data["OPPORTUNITY_FIELD_3"] = value
-    end
-
-    def admin_url
-      @data["OPPORTUNITY_FIELD_2"]
-    end
-
-    def admin_url=(value)
-      @data["OPPORTUNITY_FIELD_2"] = value
-    end
 
 
     def open?
-      @data["OPPORTUNITY_STATE"] == "Open"
+      state == "Open"
     end
 
     def lost?
-      @data["OPPORTUNITY_STATE"] == "Lost"
+      state == "Lost"
     end
 
     def won?
-      @data["OPPORTUNITY_STATE"] == "Won"
+      state == "Won"
     end
 
     def lost!
@@ -134,13 +78,13 @@ module Insightly
 
     def won!
       return if !opportunity_id
-      @data["OPPORTUNITY_STATE"] = "Won"
+      state = "Won"
       save
     end
 
     def open!
       return if !opportunity_id
-      @data["OPPORTUNITY_STATE"] = "Open"
+      state = "Open"
       save
     end
 

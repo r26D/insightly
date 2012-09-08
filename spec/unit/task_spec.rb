@@ -3,6 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + "/../spec_helper")
 describe Insightly::Task do
   before(:each) do
     Insightly::Configuration.api_key = INSIGHTLY_API_KEY
+    Insightly::Configuration.logger = Insightly::Configuration._debug_logger
     @task = Insightly::Task.new.build({
                                           "TASKLINKS" => {"OPPORTUNITY_ID" => 955454,
                                                           "TASK_LINK_ID" => 2744236,
@@ -31,6 +32,8 @@ describe Insightly::Task do
                                       })
 
     # @task = Insightly::Task.new(3216775)
+  end
+  it "should be able to create a task"  do
   end
   it "should have a url base" do
     @task.url_base.should == "Tasks"
@@ -86,6 +89,4 @@ describe Insightly::Task do
 
 
   end
-
-
 end

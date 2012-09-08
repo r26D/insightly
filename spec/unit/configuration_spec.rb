@@ -41,5 +41,10 @@ describe Insightly::Configuration do
     Insightly::Configuration.api_key.should == "Bob"
     Insightly::Configuration.instantiate.api_key.should == "Bob"
   end
+  it "should be able to set custom fields for opportunities" do
+    Insightly::Opportunity.should_receive(:custom_fields).with(:rank, :branch_of_service)
 
+    Insightly::Configuration.custom_fields_for_opportunities(:rank, :branch_of_service)
+
+  end
 end

@@ -5,12 +5,18 @@ module Insightly
 
     end
     def url_base
-      @url_base
+      self.class.const_get(:URL_BASE)
     end
 
     def build(data)
       @data = data
       self
+    end
+    def self.build(data)
+      self.new.build(data)
+    end
+    def ==(other)
+      self.remote_data == other.remote_data
     end
     def remote_data
       @data

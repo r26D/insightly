@@ -36,6 +36,10 @@ module Insightly
       )
     end
 
+    def self.custom_fields_for_opportunities(*args)
+      Insightly::Opportunity.custom_fields(*args)
+    end
+
     def self.logger
       @logger ||= _default_logger
     end
@@ -66,6 +70,11 @@ module Insightly
     def self._default_logger # :nodoc:
       logger = Logger.new(STDOUT)
       logger.level = Logger::INFO
+      logger
+    end
+    def self._debug_logger # :nodoc:
+      logger = Logger.new(STDOUT)
+      logger.level = Logger::DEBUG
       logger
     end
   end

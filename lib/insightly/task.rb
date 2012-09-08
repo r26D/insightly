@@ -1,10 +1,7 @@
 module Insightly
   class Task < Base
+    URL_BASE = "Tasks"
 
-    def initialize(id = nil)
-      @url_base = "Tasks"
-      super
-    end
     #def comment_on(body)
     #  user_id = 226277
     #  xml_data = '<?xml version="1.0" encoding="utf-8"?><Comment xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><BODY>&lt;p&gt;&amp;nbsp;Hello Nurse&lt;/p&gt;</BODY><OWNER_USER_ID>226277</OWNER_USER_ID><FILE_ATTACHMENTS/></Comment>'

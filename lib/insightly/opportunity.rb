@@ -58,19 +58,16 @@ module Insightly
     end
 
 
+    OpportunityStateReason::STATES.each do |s|
 
+      self.instance_eval do
+        define_method "#{s.downcase}?".to_sym do
+          opportunity_state == s
+        end
+      end
 
-    def open?
-      state == "Open"
     end
 
-    def lost?
-      state == "Lost"
-    end
-
-    def won?
-      state == "Won"
-    end
 
     def lost!
 

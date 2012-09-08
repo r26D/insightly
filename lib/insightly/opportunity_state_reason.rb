@@ -1,38 +1,35 @@
+#METODO for consistency move state back to opportunity_state
+
 module Insightly
   class OpportunityStateReason < ReadOnly
-    URL_BASE =  "OpportunityStateReasons"
+    URL_BASE = "OpportunityStateReasons"
+    STATES = ["Abandoned", "Lost", "Open", "Suspended", "Won"]
 
-    def state
+    def opportunity_state
       @data["FOR_OPPORTUNITY_STATE"]
     end
+
     def self.find_by_state(state)
       list = []
       OpportunityStateReason.all.each.each do |x|
-        if x.state && x.state.match(state)
+        if x.opportunity_state && x.opportunity_state.match(state)
           list << x
         end
       end
       list
     end
 
-    def self.open
-      OpportunityStateReason.find_by_state("Open")
-    end
+    STATES.each do |state|
 
-    def self.lost
-      OpportunityStateReason.find_by_state("Lost")
-    end
+      (
+      class << self;
+        self;
+      end).instance_eval do
+        define_method state.downcase.to_sym do
+          OpportunityStateReason.find_by_state(state)
+        end
+      end
 
-    def self.abandoned
-      OpportunityStateReason.find_by_state("Abandoned")
-    end
-
-    def self.won
-      OpportunityStateReason.find_by_state("Won")
-    end
-
-    def self.suspended
-      OpportunityStateReason.find_by_state("Suspended")
     end
 
   end

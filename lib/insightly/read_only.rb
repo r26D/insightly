@@ -4,6 +4,7 @@ module Insightly
       @data = {}
 
     end
+
     def url_base
       self.class.const_get(:URL_BASE)
     end

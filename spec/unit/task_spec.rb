@@ -33,7 +33,7 @@ describe Insightly::Task do
 
     # @task = Insightly::Task.new(3216775)
   end
-  it "should be able to create a task"  do
+  it "should be able to create a task" do
   end
   it "should have a url base" do
     @task.url_base.should == "Tasks"
@@ -51,6 +51,49 @@ describe Insightly::Task do
   end
   it "should know the status of the task" do
     @task.status.should == "NOT STARTED"
+  end
+  context "comments" do
+    before(:each) do
+      #@task = Insightly::Task.new(3216775)
+      @comment = Insightly::Comment.new.build({
+                                                  "COMMENT_ID" => 132456,
+                                                  "BODY" => "test comment",
+                                                  "OWNER_USER_ID" => 12345,
+                                                  "DATE_CREATED_UTC" => "2012-03-09 11:59:19",
+                                                  "DATE_UPDATED_UTC" => "2012-03-09 11:59:19",
+                                                  "FILE_ATTACHMENTS" =>
+                                                      {
+                                                          "FILE_ID" => 4567899,
+                                                          "FILE_NAME" => "test.docx",
+                                                          "CONTENT_TYPE" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                                                          "FILE_SIZE" => 2489,
+                                                          "FILE_CATEGORY_ID" => nil,
+                                                          "OWNER_USER_ID" => 12345,
+                                                          "DATE_CREATED_UTC" => "2012-03-09 11:59:20",
+                                                          "DATE_UPDATED_UTC" => "2012-03-09 11:59:20",
+                                                          "URL" => "/api/fileattachments/4567899"
+                                                      }
+                                              }
+      )
+
+    end
+    it "should be able to fetch the comments" do
+      Insightly::Task.any_instance.should_receive(:get_collection).with("Tasks/#{@task.task_id}/comments").and_return([@comment.remote_data])
+      comments = @task.comments
+      comments.length.should == 1
+      comments.first.body.should == "test comment"
+    end
+    it "should be able to post a new comment" do
+      value= "Test Comment #{Time.now}"
+      @comment.body = value
+      incoming_comment = Insightly::Comment.new.build({"BODY" => value})
+      Insightly::Task.any_instance.should_receive(:post_collection).with("Tasks/#{@task.task_id}/comments", incoming_comment.remote_data.to_json).and_return(@comment.remote_data)
+      #@task = Insightly::Task.new(3216775)
+
+      result = @task.comment_on(value)
+      result.comment_id.should_not be_nil
+      result.body.should == value
+    end
   end
   context "Status query" do
     before(:each) do

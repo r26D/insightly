@@ -5,6 +5,7 @@ require 'insightly/configuration'
 require "active_support/core_ext"  #Needed for Hash.from_xml
 
 require 'insightly/base'
+require 'insightly/read_write'
 require 'insightly/read_only'
 require 'insightly/task'
 require 'insightly/task_link'

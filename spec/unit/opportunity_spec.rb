@@ -114,7 +114,32 @@ describe Insightly::Opportunity do
     it "should be able to search by state" do
 
     end
-    context "Change" do
+    it "should allow you to change the state without a reason" do
+      @opportunity = Insightly::Opportunity.new(957168)
+
+      @opportunity.open!
+      @opportunity.lost!
+      @opportunity.reload
+      @opportunity.should be_lost
+    end
+    it "should allow you to provide a reason - and the state should change if the reason isn't valid" do
+      @opportunity = Insightly::Opportunity.new(957168)
+
+      @opportunity.open!
+      @opportunity.won!("Bobobob")
+      @opportunity.reload
+      @opportunity.should be_won
+    end
+
+    it "should allow you to change the state and set the reason" do
+      @opportunity = Insightly::Opportunity.new(957168)
+      Insightly::OpportunityStateReason.find_by_state_reason("Won", "They converted").should_not be_nil
+
+      @opportunity.open!
+      @opportunity.won!("They converted")
+      @opportunity.reload
+      @opportunity.should be_won
+      # Currently there is no way to test the reason is set
 
     end
   end

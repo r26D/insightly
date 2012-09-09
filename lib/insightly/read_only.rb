@@ -1,5 +1,5 @@
 module Insightly
-  class ReadOnly
+  class ReadOnly < Base
     def initialize
       @data = {}
 

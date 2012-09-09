@@ -39,3 +39,15 @@ opportunity = Insightly::Opportunity.new(1000)
 opportunity.opportunity_field_1 = "Ron Campbell"
 opportunity.person_who_referred_them == "Ron Campbell"
 ```
+
+Opportunity State Reasons
+========
+
+The API allows you to change the state of an opportunity directly by modifying the OPPORTUNITY_STATE field. This doesn't store the reason
+that the opportunity state was changed.  In order to store the reason, you have to PUT to OpportunityStateChange with a valid OpportunityStateReason.
+OpportunityStateReasons can only be created manually in the web interface and then referred to via the API.
+
+This is important if you want to have it show you the state changes in the Opportuity details. Direct modifications don't create a log entry.
+Whereas the log entry is created if you do create them. In order for your code to work, you need to make sure you have valid Opportunity State Reasons for all the states.
+
+We default to creating two for open -  "Created by API", and "Reopened by API". This allows us to set those as reasons if they exist.

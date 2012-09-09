@@ -1,6 +1,6 @@
 #METODO Add support for FileAttachment xml
 module Insightly
-  class Comment < Base
+  class Comment < ReadWrite
     URL_BASE = "Comments"
 
     api_field "COMMENT_ID",

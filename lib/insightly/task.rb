@@ -1,7 +1,7 @@
 #METODO Find a way to link a task to an opportunity
 
 module Insightly
-  class Task < Base
+  class Task < ReadWrite
     URL_BASE = "Tasks"
 
     def comments

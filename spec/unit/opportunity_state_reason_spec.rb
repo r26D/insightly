@@ -35,6 +35,21 @@ describe Insightly::OpportunityStateReason do
     before(:each) do
       Insightly::OpportunityStateReason.any_instance.stub(:get_collection).and_return(@all_states.collect { |x| x.remote_data })
     end
+    it "should return nil if there is no match for state and reason" do
+       Insightly::OpportunityStateReason.find_by_state_reason("Won","They hated us.").should be nil
+       Insightly::OpportunityStateReason.find_by_state_reason("Wont","They converted").should be nil
+       Insightly::OpportunityStateReason.find_by_state_reason("Wont","They hated us.").should be nil
+    end
+    it "should return a opportunity state reason if you search by state and reason" do
+      Insightly::OpportunityStateReason.find_by_state_reason("Won","They converted").should == @won_state
+    end
+    it "should return nil if there is no match for the reason in a given state" do
+      Insightly::OpportunityStateReason.won("They hated us.").should be nil
+
+    end
+    it "should return an opportunity state reason if you search for a reason for a given state" do
+      Insightly::OpportunityStateReason.won("They converted").should == @won_state
+    end
     it "should be able to pull down all of them" do
       Insightly::OpportunityStateReason.all.should == @all_states
     end

@@ -1,8 +1,10 @@
 #METODO Fix the search by name
 #METODO Fix status checking
-#METODO fix the state change - so you can actually log a reason
+
+#METODO on create set the state to open "Opended by API" if it exists
+
 module Insightly
-  class Opportunity < Base
+  class Opportunity < ReadWrite
     URL_BASE = "Opportunities"
     CUSTOM_FIELD_PREFIX = "OPPORTUNITY_FIELD"
     api_field "OPPORTUNITY_FIELD_10",
@@ -53,10 +55,6 @@ module Insightly
       list
     end
 
-    def opportunity_id
-      @data["OPPORTUNITY_ID"]
-    end
-
 
     OpportunityStateReason::STATES.each do |s|
 
@@ -64,26 +62,27 @@ module Insightly
         define_method "#{s.downcase}?".to_sym do
           opportunity_state == s
         end
+
+        define_method "#{s.downcase}!".to_sym do |*args|
+          reason = args.first
+          @state_reason = nil
+          if reason
+            @state_reason = Insightly::OpportunityStateReason.find_by_state_reason(s, reason)
+          end
+
+          if @state_reason
+            put_collection("OpportunityStateChange/#{opportunity_id}", @state_reason.remote_data.to_json)
+            reload
+          else
+            #Changing state without a reason/log entry
+            opportunity_state = s
+            save
+          end
+        end
       end
 
     end
 
-
-    def lost!
-
-    end
-
-    def won!
-      return if !opportunity_id
-      state = "Won"
-      save
-    end
-
-    def open!
-      return if !opportunity_id
-      state = "Open"
-      save
-    end
 
     def self.search_by_name(name)
       data = Insightly::get_collection(@@url_base)

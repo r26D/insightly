@@ -1,5 +1,3 @@
-#METODO for consistency move state back to opportunity_state
-
 module Insightly
   class OpportunityStateReason < ReadOnly
     URL_BASE = "OpportunityStateReasons"
@@ -7,9 +5,7 @@ module Insightly
     api_field "STATE_REASON_ID",
               "FOR_OPPORTUNITY_STATE",
               "STATE_REASON"
-    def opportunity_state
-      @data["FOR_OPPORTUNITY_STATE"]
-    end
+
 
     def self.find_by_state(state)
       list = []

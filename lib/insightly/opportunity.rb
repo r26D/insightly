@@ -1,7 +1,4 @@
 #METODO Fix the search by name
-#METODO Fix status checking
-
-#METODO on create set the state to open "Opended by API" if it exists
 
 module Insightly
   class Opportunity < ReadWrite
@@ -95,5 +92,18 @@ module Insightly
       list
     end
 
+    def save
+      creating = remote_id ? true : false
+
+      super
+      if creating
+        @state_reason = Insightly::OpportunityStateReason.find_by_state_reason(s, "Created by API")
+
+        if @state_reason
+          put_collection("OpportunityStateChange/#{opportunity_id}", @state_reason.remote_data.to_json)
+        end
+      end
+
+    end
   end
 end

@@ -142,5 +142,10 @@ describe Insightly::Opportunity do
       # Currently there is no way to test the reason is set
 
     end
+    it "should set the reason to Created by API if you create an opportunity"
+
+  end
+  it "should be able to search by opportunity name" do
+
   end
 end

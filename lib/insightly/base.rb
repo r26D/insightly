@@ -57,6 +57,9 @@ module Insightly
       self
     end
 
+    def reload
+      load(remote_id)
+    end
     def build(data)
       @data = data
       self
@@ -75,13 +78,12 @@ module Insightly
     end
 
     def process(result, content_type)
-      puts result
       if content_type == :json
         JSON.parse(result.to_str)
       elsif content_type == :xml
         Hash.from_xml(result.to_str)
       else
-        result.to_str
+        result
       end
     end
 
@@ -89,33 +91,48 @@ module Insightly
       Insightly::Configuration.instantiate
     end
 
-    def get_collection(path, content_type = :json)
+    def get_collection(path, content_selector = :json)
+      if content_selector == :xml_raw
+        content_type = :xml
+      else
+        content_type = content_selector
+      end
       response = RestClient::Request.new(:method => :get,
                                          :url => "#{config.endpoint}/#{path.to_s}",
                                          :user => config.api_key,
                                          :password => "",
                                          :headers => {:accept => content_type, :content_type => content_type}).execute
-      process(response, content_type)
+      process(response, content_selector)
     end
 
-    def post_collection(path, params, content_type = :json)
+    def post_collection(path, params, content_selector = :json)
+      if content_selector == :xml_raw
+        content_type = :xml
+      else
+        content_type = content_selector
+      end
       response = RestClient::Request.new(:method => :post,
                                          :url => "#{config.endpoint}/#{path.to_s}",
                                          :user => config.api_key,
                                          :password => "",
                                          :payload => params,
                                          :headers => {:accept => content_type, :content_type => content_type}).execute
-      process(response, content_type)
+      process(response, content_selector)
     end
 
-    def put_collection(path, params, content_type = :json)
+    def put_collection(path, params, content_selector = :json)
+      if content_selector == :xml_raw
+        content_type = :xml
+      else
+        content_type = content_selector
+      end
       response = RestClient::Request.new(:method => :put,
                                          :url => "#{config.endpoint}/#{path.to_s}",
                                          :user => config.api_key,
                                          :password => "",
                                          :payload => params,
                                          :headers => {:accept => content_type, :content_type => content_type}).execute
-      process(response, content_type)
+      process(response, content_selector)
     end
 
     def save

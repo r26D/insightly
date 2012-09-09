@@ -47,7 +47,46 @@ describe Insightly::Comment do
     comment = Insightly::Comment.new.build({"BODY" => "Other"})
     comment.remote_data.should == {"BODY" => "Other"}
   end
+  context "xml" do
+    before(:each) do
+      @raw_xml = <<-END_XML
+<?xml version="1.0" encoding="utf-8"?>
+        <Comment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <COMMENT_ID>132456</COMMENT_ID>
+        <BODY>test comment</BODY>
+        <OWNER_USER_ID>12345</OWNER_USER_ID>
+        <DATE_CREATED_UTC>2012-03-09T23:59:19.503</DATE_CREATED_UTC>
+        <DATE_UPDATED_UTC>2012-03-09T23:59:19.503</DATE_UPDATED_UTC>
+        <FILE_ATTACHMENTS></FILE_ATTACHMENTS>
+        </Comment>
+      END_XML
+    end
+    it "should be able to parse the xml into a valid comment" do
+      @comment = Insightly::Comment.new.load_from_xml(@raw_xml)
+      @comment.comment_id.should == 132456
+      @comment.body.should == "test comment"
+      @comment.date_created_utc.should == "2012-03-09T23:59:19.503"
+      @comment.date_updated_utc.should == "2012-03-09T23:59:19.503"
+      @comment.owner_user_id.should == 12345
 
+    end
+    it "should be able to generate xml from the commment" do
+      @comment = Insightly::Comment.new.load_from_xml(@raw_xml)
+      @comment.to_xml.should == @raw_xml
+    end
+  end
+
+  it "should allow you to modify a comment" do
+    @comment = Insightly::Comment.new(769043)
+    before_body = @comment.body
+    value = "Test Comment Edit #{Time.now}"
+    @comment.body = value
+    @comment.save
+    @comment.body.should == value
+
+    @comment.reload
+    @comment.body.should == value
+  end
 
 
 end

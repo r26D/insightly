@@ -1,8 +1,5 @@
 #METODO only allow build to set fields that are part of the API fields
 #METODO make a distinction between fields that you can set and save and ones you can only read - like DATE_UPDATED_UTC
-
-
-#METODO Build and deploy a gem of this code
 module Insightly
   class Base
 

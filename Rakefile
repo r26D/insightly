@@ -1,6 +1,8 @@
 require "rubygems"
 require "rspec/core/rake_task"
 require "rake/task"
+require File.dirname(__FILE__) + "/lib/insightly/configuration.rb"
+#require File.dirname(__FILE__) + "/lib/insightly/version.rb"
 
 task :default => :spec
 
@@ -12,15 +14,20 @@ desc "Run units"
 RSpec::Core::RakeTask.new('spec')
 
 
-task :gem do
+desc "Build the gem"
+task :gem => :clean do
   exec('gem build insightly.gemspec')
 end
 
-require File.dirname(__FILE__) + "/lib/insightly/configuration.rb"
+desc "Push the gem out to rubygems"
+task :push_gem => :gem do 
+  exec("gem push insightly-#{Insightly::Version::String}.gem")
+end
+
 
 desc 'Cleans generated files'
 task :clean do
   rm_f Dir.glob('*.gem').join(" ")
   rm_rf "rdoc"
-  rm_rf "bt_rdoc"
 end
+

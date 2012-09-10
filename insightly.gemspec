@@ -16,5 +16,5 @@ Gem::Specification.new do |s|
   s.add_dependency "rest-client", ">=1.6.7"
   s.add_dependency "logger", ">=1.2.8"
   s.add_dependency "active_support", ">=3.0.0"
-  s.add_dependency "i18n", ">=0.6.1"
+  s.add_dependency "i18n"
 end

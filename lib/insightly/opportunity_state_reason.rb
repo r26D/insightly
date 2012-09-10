@@ -1,6 +1,6 @@
 module Insightly
   class OpportunityStateReason < ReadOnly
-    URL_BASE = "OpportunityStateReasons"
+    self.url_base = "OpportunityStateReasons"
     STATES = ["Abandoned", "Lost", "Open", "Suspended", "Won"]
     api_field "STATE_REASON_ID",
               "FOR_OPPORTUNITY_STATE",
@@ -10,7 +10,7 @@ module Insightly
     def self.find_by_state(state)
       list = []
       OpportunityStateReason.all.each.each do |x|
-        if x.opportunity_state && x.opportunity_state.match(state)
+        if x.for_opportunity_state && x.for_opportunity_state.match(state)
           list << x
         end
       end
@@ -19,7 +19,7 @@ module Insightly
 
     def self.find_by_state_reason(state,reason)
       OpportunityStateReason.all.each.each do |x|
-              return x if x.opportunity_state && x.opportunity_state.match(state) && x.state_reason == reason
+              return x if x.for_opportunity_state && x.for_opportunity_state.match(state) && x.state_reason == reason
       end
       nil
     end

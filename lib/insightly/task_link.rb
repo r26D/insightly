@@ -1,6 +1,6 @@
 module Insightly
   class TaskLink < ReadOnly
-    URL_BASE ="TaskLinks"
+    self.url_base ="TaskLinks"
 
     def opportunity_id
       @data["OPPORTUNITY_ID"]

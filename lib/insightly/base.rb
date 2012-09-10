@@ -2,13 +2,15 @@
 #METODO make a distinction between fields that you can set and save and ones you can only read - like DATE_UPDATED_UTC
 
 
+#METODO Build and deploy a gem of this code
 module Insightly
   class Base
-    @@api_fields = []
 
-    def self.api_fields
-      @@api_fields
+    class << self
+      attr_accessor :api_fields,:url_base
     end
+    self.api_fields = []
+
 
     def self.custom_fields(*args)
 
@@ -27,7 +29,8 @@ module Insightly
 
     def self.api_field(*args)
       args.each do |field|
-        @@api_fields << field
+        self.api_fields = [] if !self.api_fields
+        self.api_fields << field
         method_name = field.downcase.to_sym
         send :define_method, method_name do
           @data[field]
@@ -44,10 +47,10 @@ module Insightly
       load(id) if id
     end
 
-    def url_base
-      self.class.const_get(:URL_BASE)
-    end
 
+    def url_base
+      self.class.url_base
+    end
     def remote_id
       raise ScriptError, "This should be overridden in the subclass"
     end
@@ -60,6 +63,7 @@ module Insightly
     def reload
       load(remote_id)
     end
+
     def build(data)
       @data = data
       self
@@ -105,8 +109,14 @@ module Insightly
       process(response, content_selector)
     end
 
-
-
+    def self.all
+      item = self.new
+      list = []
+      item.get_collection(item.url_base).each do |d|
+        list << self.new.build(d)
+      end
+      list
+    end
 
 
   end

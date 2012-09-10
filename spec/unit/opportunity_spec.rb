@@ -59,11 +59,13 @@ describe Insightly::Opportunity do
     opportunity.remote_data.should == {"TITLE" => "Other"}
   end
   it "should have allow you to read and write all fields" do
+    fields = Insightly::Opportunity.api_fields
+
     Insightly::Opportunity.api_fields.each do |f|
       @opportunity.send(f.downcase.to_sym).should == @opportunity.remote_data[f]
       @opportunity.send("#{f.downcase}=".to_sym, "Bob")
       @opportunity.send(f.downcase.to_sym).should == "Bob"
-      @opportunity.remote_data[f].should == "Bob"
+    @opportunity.remote_data[f].should == "Bob"
     end
   end
   it "should allow you to define custom field labels" do
@@ -93,6 +95,34 @@ describe Insightly::Opportunity do
     @opportunity.company_name.should == "r26D Trucking"
     @opportunity.contact_name.should == "Bob Roberts"
   end
+  context "search/find" do
+    before(:each) do
+      @opp1 = Insightly::Opportunity.build(@opportunity.remote_data.clone)
+      @opp1.opportunity_name = "Apple Sale"
+      @opp2 = Insightly::Opportunity.build(@opportunity.remote_data.clone)
+      @opp2.opportunity_name = "Apple Sale 2"
+      @opp3 = Insightly::Opportunity.build(@opportunity.remote_data.clone)
+      @opp3.opportunity_name = "Box Sale"
+      @opp4 = Insightly::Opportunity.build(@opportunity.remote_data.clone)
+      @opp4.opportunity_name = nil
+
+      Insightly::Opportunity.should_receive(:all).and_return([@opp1, @opp2, @opp3, @opp4])
+
+    end
+    it "should find all the names that match" do
+  Insightly::Opportunity.search_by_name("Apple").should == [@opp1, @opp2]
+    end
+    it "should return an empty array if there are not matches" do
+      Insightly::Opportunity.search_by_name("Cobra").should == []
+    end
+    it "should find the first one that is exactly the right" do
+      Insightly::Opportunity.find_by_name("Apple Sale 2").should == @opp2
+    end
+    it "should return nil if no opportunity name is found" do
+      Insightly::Opportunity.find_by_name("Cobra").should == nil
+    end
+  end
+
   context "State" do
     it "should have state booleans" do
 
@@ -119,6 +149,7 @@ describe Insightly::Opportunity do
 
       @opportunity.open!
       @opportunity.lost!
+      @opportunity.should be_lost
       @opportunity.reload
       @opportunity.should be_lost
     end
@@ -145,7 +176,5 @@ describe Insightly::Opportunity do
     it "should set the reason to Created by API if you create an opportunity"
 
   end
-  it "should be able to search by opportunity name" do
 
-  end
 end

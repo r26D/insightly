@@ -45,14 +45,7 @@ module Insightly
                                          :headers => {:accept => content_type, :content_type => content_type}).execute
       process(response, content_type)
     end
-    def self.all
-      item  = self.new
-      list = []
-      item.get_collection(item.url_base).each  do  |d|
-         list << self.new.build(d)
-      end
-      list
-    end
+
 
 
   end

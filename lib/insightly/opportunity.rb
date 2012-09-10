@@ -1,8 +1,8 @@
-#METODO Fix the search by name
 
+#METODO Confirm that we can create an opportunity
 module Insightly
   class Opportunity < ReadWrite
-    URL_BASE = "Opportunities"
+    self.url_base = "Opportunities"
     CUSTOM_FIELD_PREFIX = "OPPORTUNITY_FIELD"
     api_field "OPPORTUNITY_FIELD_10",
               "OPPORTUNITY_FIELD_9",
@@ -20,7 +20,7 @@ module Insightly
               "DATE_UPDATED_UTC",
               "OWNER_USER_ID",
               "BID_DURATION",
-              "BID_CURRENTY",
+              "BID_CURRENCY",
               "PIPELINE_ID",
               "CATEGORY_ID",
               "PROBABILITY",
@@ -57,7 +57,7 @@ module Insightly
 
       self.instance_eval do
         define_method "#{s.downcase}?".to_sym do
-          opportunity_state == s
+          self.opportunity_state == s
         end
 
         define_method "#{s.downcase}!".to_sym do |*args|
@@ -72,7 +72,8 @@ module Insightly
             reload
           else
             #Changing state without a reason/log entry
-            opportunity_state = s
+
+            self.opportunity_state = s
             save
           end
         end
@@ -80,24 +81,29 @@ module Insightly
 
     end
 
+    def self.find_by_name(name)
+      Insightly::Opportunity.all.each do |o|
+        return o if o.opportunity_name && o.opportunity_name == name
+      end
+      nil
+    end
 
     def self.search_by_name(name)
-      data = Insightly::get_collection(@@url_base)
       list = []
-      data.each do |x|
-        if x["OPPORTUNITY_NAME"].match(name)
-          list << Insightly::Opportunity.new.build(x)
+      Insightly::Opportunity.all.each do |o|
+        if o.opportunity_name && o.opportunity_name.match(name)
+          list << o
         end
       end
       list
     end
 
     def save
-      creating = remote_id ? true : false
+      creating = remote_id ? false : true
 
       super
       if creating
-        @state_reason = Insightly::OpportunityStateReason.find_by_state_reason(s, "Created by API")
+        @state_reason = Insightly::OpportunityStateReason.find_by_state_reason("Open", "Created by API")
 
         if @state_reason
           put_collection("OpportunityStateChange/#{opportunity_id}", @state_reason.remote_data.to_json)

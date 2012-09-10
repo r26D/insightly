@@ -2,7 +2,7 @@
 
 module Insightly
   class Task < ReadWrite
-    URL_BASE = "Tasks"
+    self.url_base = "Tasks"
 
     def comments
       list = []

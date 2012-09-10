@@ -16,12 +16,12 @@ RSpec::Core::RakeTask.new('spec')
 
 desc "Build the gem"
 task :gem => :clean do
-  exec('gem build insightly.gemspec')
+  run 'gem build insightly.gemspec'
 end
 
 desc "Push the gem out to rubygems"
 task :push_gem => :gem do 
-  exec("gem push insightly-#{Insightly::Version::String}.gem")
+  run "gem push insightly-#{Insightly::Version::String}.gem"
 end
 
 

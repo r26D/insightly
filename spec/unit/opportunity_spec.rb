@@ -43,6 +43,37 @@ describe Insightly::Opportunity do
                                                 })
   end
   it "should be able to create a opportunity" do
+    Insightly::Configuration.custom_fields_for_opportunities(:dummy1,
+    	:admin_url,
+    	:phone_number,
+    	:timezone,
+    	:plan,
+    	:organization,
+    	:company_name,
+    	:contact_name)
+
+  o = Insightly::Opportunity.new
+  o.opportunity_state = "Open"
+  o.visible_to = "EVERYONE"
+  o.stage_id = "71162"
+  o.forecast_close_date = "2012-10-05 00:00:00"
+  o.responsible_user_id = "226277"
+  o.bid_currency = "USD"
+  o.opportunity_details = "This is the description"
+  o.category_id = "628187" #First plan list
+  o.bid_amount = "75"
+  o.pipeline_id = "24377"
+  o.opportunity_name = "Sample Opportunity 3"
+  o.contact_name = "Dirk ELmendorf"
+  o.company_name = "r26D"
+  o.organization = "TruckingOffice"
+  o.plan = "Owner/Operator"
+  o.timezone = "Central"
+  o.phone_number = "210-555-1212"
+  o.admin_url = "https://admin/companies/122"
+  o.bid_type = "Fixed Bid"
+  o.owner_user_id = "226277"
+  o.save
   end
   it "should have a url base" do
     @opportunity.url_base.should == "Opportunities"

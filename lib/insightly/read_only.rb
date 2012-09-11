@@ -5,10 +5,6 @@ module Insightly
 
     end
 
-    def url_base
-      self.class.const_get(:URL_BASE)
-    end
-
     def build(data)
       @data = data
       self

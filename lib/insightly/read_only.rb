@@ -4,7 +4,6 @@ module Insightly
       @data = {}
 
     end
-
     def build(data)
       @data = data
       self

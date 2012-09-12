@@ -44,4 +44,5 @@ describe Insightly::TaskLink do
     Insightly::TaskLink.search_by_opportunity_id(@tl2.opportunity_id).should == [@tl2]
   end
 
+
 end

@@ -2,7 +2,7 @@ require "rubygems"
 require "rspec/core/rake_task"
 require "rake/task"
 require File.dirname(__FILE__) + "/lib/insightly/configuration.rb"
-#require File.dirname(__FILE__) + "/lib/insightly/version.rb"
+require File.dirname(__FILE__) + "/lib/insightly/version.rb"
 
 task :default => :spec
 

@@ -1,8 +1,29 @@
 #METODO Find a way to link a task to an opportunity
-
+#METODO link to a contact/organization
 module Insightly
   class Task < ReadWrite
     self.url_base = "Tasks"
+    api_field "TASK_ID",
+    "TITLE",
+    "CATEGORY_ID",
+    "DUE_DATE",
+    "COMPLETED_DATE_UTC",
+    "PUBLICLY_VISIBLE",
+    "COMPLETED",
+    "PROJECT_ID",
+    "DETAILS",
+    "STATUS",
+    "PRIORITY",
+    "PERCENT_COMPLETE",
+    "START_DATE",
+    "ASSIGNED_BY_USER_ID",
+    "PARENT_TASK_ID",
+    "RECURRENCE",
+    "RESPONSIBLE_USER_ID",
+    "OWNER_USER_ID",
+    "DATE_CREATED_UTC",
+    "DATE_UPDATED_UTC",
+    "TASKLINKS"
 
     def comments
       list = []

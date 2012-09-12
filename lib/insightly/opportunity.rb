@@ -1,4 +1,4 @@
-
+#METODO link an opportunity to a contact/organization
 #METODO Confirm that we can create an opportunity
 module Insightly
   class Opportunity < ReadWrite

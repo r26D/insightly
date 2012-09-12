@@ -56,5 +56,5 @@ We default to creating two for open -  "Created by API", and "Reopened by API". 
 Organisation? Organization
 ===========
 
-The documentation for the mixes us Organization and Organisation. Insight.ly spells it Organisation - so we
+The documentation for Insight.ly the mixes the use of Organization and Organisation. Insight.ly spells it Organisation in urls and in the API - so we
 only use that spelling in the library.

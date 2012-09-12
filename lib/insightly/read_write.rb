@@ -1,11 +1,17 @@
 module Insightly
   class ReadWrite < Base
+    def to_json
+      @data.to_json
+    end
+    def update_data(data)
+      @data = data
+    end
     def save
       if !remote_id
-        @data = post_collection("#{url_base}", @data.to_json)
+        update_data(post_collection("#{url_base}", self.to_json))
       else
 
-        @data = put_collection("#{url_base}/#{remote_id}", @data.to_json)
+        update_data(put_collection("#{url_base}/#{remote_id}", self.to_json))
 
       end
 

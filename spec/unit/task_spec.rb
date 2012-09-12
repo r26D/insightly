@@ -132,4 +132,42 @@ describe Insightly::Task do
 
 
   end
+  it "should be able to link a task to an opportunity" do
+    @opportunity = Insightly::Opportunity.build({
+
+                                                    "VISIBLE_TO" => "EVERYONE",
+                                                    "BID_TYPE" => "Fixed Bid",
+                                                    "ACTUAL_CLOSE_DATE" => nil,
+                                                    "BID_CURRENTY" => "USD",
+                                                    "OPPORTUNITY_STATE" => "Open",
+                                                    "OPPORTUNITY_NAME" => "Linkable Opportunity",
+                                                    "OPPORTUNITY_DETAILS" => "This is a description."
+                                                })
+
+    @task = Insightly::Task.new.build({
+
+
+                                            "PUBLICLY_VISIBLE" => true,
+                                            "RESPONSIBLE_USER_ID" => "226277" ,
+                                                "OWNER_USER_ID" =>  "226277"   ,
+                                            "DETAILS" => "This proves we can link them",
+
+                                            "TITLE" => "Linkable Task"
+                                        })
+   # @opportunity.save
+    @opportunity = Insightly::Opportunity.new(968613)
+    @task.save
+    #"TASKLINKS" => {"OPPORTUNITY_ID" => 955454,
+    #                                                         "TASK_LINK_ID" => 2744236,
+    #                                                        "PROJECT_ID" => nil,
+    #                                                        "CONTACT_ID" => nil,
+    #                                                        "TASK_ID" => nil,
+    #                                                        "ORGANIZATION_ID" => nil
+    #                                                                           },
+    @task_link = Insightly::TaskLink.build("OPPORTUNITY_ID" => @opportunity.opportunity_id.to_s,
+                                           "TASK_ID" => @task.task_id.to_s
+                                          )
+    @task.tasklinks = [@task_link.remote_data]
+    @task.save
+  end
 end

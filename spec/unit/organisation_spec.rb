@@ -58,18 +58,18 @@ describe Insightly::Organisation do
       @org.save
 
       @address = Insightly::Address.new
-           @address.address_type = "Work"
-           @address.street = "123 Main St"
-           @address.city = "Indianpolis"
-           @address.state = "IN"
-           @address.postcode = "46112"
-           @address.country = "US"
+      @address.address_type = "Work"
+      @address.street = "123 Main St"
+      @address.city = "Indianpolis"
+      @address.state = "IN"
+      @address.postcode = "46112"
+      @address.country = "US"
     end
-    it "should allow you to update an address"   do
+    it "should allow you to update an address" do
       @org.addresses.should == []
-            @org.add_address(@address)
+      @org.add_address(@address)
 
-            @org.save
+      @org.save
       @address.state = "TX"
       @org.addresses = [@address]
       @org.save
@@ -88,7 +88,7 @@ describe Insightly::Organisation do
       @org.addresses.length.should == 1
       @org.addresses.first.street.should == "123 Main St"
     end
-    it "should allow you to remove an address"  do
+    it "should allow you to remove an address" do
 
       @org.addresses.should == []
       @org.add_address(@address)
@@ -100,7 +100,7 @@ describe Insightly::Organisation do
       @org.addresses.length.should == 0
 
     end
-    it "should allow you to clear all addresses"    do
+    it "should allow you to clear all addresses" do
       @org.addresses.should == []
       @org.add_address(@address)
 
@@ -111,13 +111,73 @@ describe Insightly::Organisation do
       @org.addresses.length.should == 0
     end
 
-    it "should not add an address if the same address is already on the organization"  do
+    it "should not add an address if the same address is already on the organization" do
 
       @org.addresses.should == []
-           @org.add_address(@address)
+      @org.add_address(@address)
 
-           @org.add_address(@address)
+      @org.add_address(@address)
       @org.addresses.length.should == 1
+    end
+  end
+
+  context "contact_infos" do
+    before(:each) do
+      @org = Insightly::Organisation.new(8936117)
+      @org.contact_infos = []
+      @org.save
+
+      @contact_info = Insightly::ContactInfo.new
+      @contact_info.type = "PHONE"
+      @contact_info.label = "Work"
+      @contact_info.subtype = nil
+      @contact_info.detail = "bob@aol.com"
+
+    end
+    it "should allow you to update an contact_info" do
+      @org.contact_infos.should == []
+      @org.add_contact_info(@contact_info)
+
+      @org.save
+      @contact_info.detail = "bobroberts@aol.com"
+      @org.contact_infos = [@contact_info]
+      @org.save
+      @org.reload
+      @org.contact_infos.length.should == 1
+      @org.contact_infos.first.detail.should == "bobroberts@aol.com"
+    end
+    it "should allow you to add an contact_info" do
+
+
+      @org.contact_infos.should == []
+      @org.add_contact_info(@contact_info)
+
+      @org.save
+      @org.reload
+      @org.contact_infos.length.should == 1
+      @org.contact_infos.first.detail.should == "bob@aol.com"
+    end
+    it "should allow you to remove an contact_info" do
+
+      @org.contact_infos.should == []
+      @org.add_contact_info(@contact_info)
+
+      @org.save
+      @org.contact_infos = []
+      @org.save
+      @org.reload
+      @org.contact_infos.length.should == 0
+
+    end
+    it "should allow you to clear all contact_infos" do
+      @org.contact_infos.should == []
+      @org.add_contact_info(@contact_info)
+
+      @org.save
+      @org.contact_infos = []
+      @org.save
+      @org.reload
+      @org.contact_infos.length.should == 0
     end
   end
 end

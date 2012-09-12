@@ -1,5 +1,3 @@
-#METODO be able to add addresses
-#METODO be able to add contact infos
 #METODO be able to link to tasks
 #METODO be able to link to contacts
 #METODO be able to link to opportunities
@@ -7,6 +5,7 @@
 module Insightly
   class Organisation < ReadWrite
     include Insightly::AddressHelper
+    include Insightly::ContactInfoHelper
     self.url_base = "Organisations"
     CUSTOM_FIELD_PREFIX = "ORGANISATION_FIELD"
     api_field "ORGANISATION_ID",

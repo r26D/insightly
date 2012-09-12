@@ -135,4 +135,63 @@ describe Insightly::Contact do
       @contact.addresses.length.should == 1
     end
   end
+  context "contact_infos" do
+     before(:each) do
+       @contact = Insightly::Contact.new(20315449)
+       @contact.contact_infos = []
+       @contact.save
+ 
+       @contact_info = Insightly::ContactInfo.new
+       @contact_info.type = "PHONE"
+       @contact_info.label = "Work"
+       @contact_info.subtype = nil
+       @contact_info.detail = "bob@aol.com"
+ 
+     end
+     it "should allow you to update an contact_info" do
+       @contact.contact_infos.should == []
+       @contact.add_contact_info(@contact_info)
+ 
+       @contact.save
+       @contact_info.detail = "bobroberts@aol.com"
+       @contact.contact_infos = [@contact_info]
+       @contact.save
+       @contact.reload
+       @contact.contact_infos.length.should == 1
+       @contact.contact_infos.first.detail.should == "bobroberts@aol.com"
+     end
+     it "should allow you to add an contact_info" do
+ 
+ 
+       @contact.contact_infos.should == []
+       @contact.add_contact_info(@contact_info)
+ 
+       @contact.save
+       @contact.reload
+       @contact.contact_infos.length.should == 1
+       @contact.contact_infos.first.detail.should == "bob@aol.com"
+     end
+     it "should allow you to remove an contact_info" do
+ 
+       @contact.contact_infos.should == []
+       @contact.add_contact_info(@contact_info)
+ 
+       @contact.save
+       @contact.contact_infos = []
+       @contact.save
+       @contact.reload
+       @contact.contact_infos.length.should == 0
+ 
+     end
+     it "should allow you to clear all contact_infos" do
+       @contact.contact_infos.should == []
+       @contact.add_contact_info(@contact_info)
+ 
+       @contact.save
+       @contact.contact_infos = []
+       @contact.save
+       @contact.reload
+       @contact.contact_infos.length.should == 0
+     end
+   end
 end

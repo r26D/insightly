@@ -1,11 +1,10 @@
-#METODO be able to add addresses
-#METODO be able to add contact infos
 #METODO be able to link to tasks
 #METODO be able to link to organizations
 #METODO be able to link to opportunities
 module Insightly
   class Contact < ReadWrite
     include Insightly::AddressHelper
+    include Insightly::ContactInfoHelper
     self.url_base = "Contacts"
     CUSTOM_FIELD_PREFIX = "CONTACT_FIELD"
     api_field "CONTACT_ID",

@@ -5,33 +5,33 @@ describe Insightly::Contact do
     Insightly::Configuration.api_key = INSIGHTLY_API_KEY
 
     @contact = Insightly::Contact.build({"CONTACT_ID" => 1234567,
-                                     "SALUTATION" => nil,
-                                     "FIRST_NAME" => "John",
-                                     "LAST_NAME" => "Doe",
-                                     "BACKGROUND" => nil,
-                                     "CONTACT_FIELD_1" => nil,
-                                     "CONTACT_FIELD_2" => nil,
-                                     "CONTACT_FIELD_3" => nil,
-                                     "CONTACT_FIELD_4" => nil,
-                                     "CONTACT_FIELD_5" => nil,
-                                     "CONTACT_FIELD_6" => nil,
-                                     "CONTACT_FIELD_7" => nil,
-                                     "CONTACT_FIELD_8" => nil,
-                                     "CONTACT_FIELD_9" => nil,
-                                     "CONTACT_FIELD_10" => nil,
-                                     "DATE_CREATED_UTC" => "2012-03-13 05:19:10",
-                                     "DATE_UPDATED_UTC" => "2012-03-13 05:19:10",
-                                     " ADDRESSES" => [],
-                                     "CONTACTINFOS" => [{
-                                                            "CONTACT_INFO_ID" => 7894561,
-                                                            "TYPE" => "EMAIL",
-                                                            "SUBTYPE" => nil,
-                                                            "LABEL" => "Home",
-                                                            "DETAIL" => "johndoe@insight.ly"
-                                                        }],
-                                     "VISIBLE_TO" => "EVERYONE",
-                                     "VISIBLE_TEAM_ID" => nil
-                                    })
+                                         "SALUTATION" => nil,
+                                         "FIRST_NAME" => "John",
+                                         "LAST_NAME" => "Doe",
+                                         "BACKGROUND" => nil,
+                                         "CONTACT_FIELD_1" => nil,
+                                         "CONTACT_FIELD_2" => nil,
+                                         "CONTACT_FIELD_3" => nil,
+                                         "CONTACT_FIELD_4" => nil,
+                                         "CONTACT_FIELD_5" => nil,
+                                         "CONTACT_FIELD_6" => nil,
+                                         "CONTACT_FIELD_7" => nil,
+                                         "CONTACT_FIELD_8" => nil,
+                                         "CONTACT_FIELD_9" => nil,
+                                         "CONTACT_FIELD_10" => nil,
+                                         "DATE_CREATED_UTC" => "2012-03-13 05:19:10",
+                                         "DATE_UPDATED_UTC" => "2012-03-13 05:19:10",
+                                         " ADDRESSES" => [],
+                                         "CONTACTINFOS" => [{
+                                                                "CONTACT_INFO_ID" => 7894561,
+                                                                "TYPE" => "EMAIL",
+                                                                "SUBTYPE" => nil,
+                                                                "LABEL" => "Home",
+                                                                "DETAIL" => "johndoe@insight.ly"
+                                                            }],
+                                         "VISIBLE_TO" => "EVERYONE",
+                                         "VISIBLE_TEAM_ID" => nil
+                                        })
     #  @task_links = Insightly::TaskLink.all
     #  d = 1
   end
@@ -136,62 +136,120 @@ describe Insightly::Contact do
     end
   end
   context "contact_infos" do
-     before(:each) do
-       @contact = Insightly::Contact.new(20315449)
-       @contact.contact_infos = []
-       @contact.save
- 
-       @contact_info = Insightly::ContactInfo.new
-       @contact_info.type = "PHONE"
-       @contact_info.label = "Work"
-       @contact_info.subtype = nil
-       @contact_info.detail = "bob@aol.com"
- 
-     end
-     it "should allow you to update an contact_info" do
-       @contact.contact_infos.should == []
-       @contact.add_contact_info(@contact_info)
- 
-       @contact.save
-       @contact_info.detail = "bobroberts@aol.com"
-       @contact.contact_infos = [@contact_info]
-       @contact.save
-       @contact.reload
-       @contact.contact_infos.length.should == 1
-       @contact.contact_infos.first.detail.should == "bobroberts@aol.com"
-     end
-     it "should allow you to add an contact_info" do
- 
- 
-       @contact.contact_infos.should == []
-       @contact.add_contact_info(@contact_info)
- 
-       @contact.save
-       @contact.reload
-       @contact.contact_infos.length.should == 1
-       @contact.contact_infos.first.detail.should == "bob@aol.com"
-     end
-     it "should allow you to remove an contact_info" do
- 
-       @contact.contact_infos.should == []
-       @contact.add_contact_info(@contact_info)
- 
-       @contact.save
-       @contact.contact_infos = []
-       @contact.save
-       @contact.reload
-       @contact.contact_infos.length.should == 0
- 
-     end
-     it "should allow you to clear all contact_infos" do
-       @contact.contact_infos.should == []
-       @contact.add_contact_info(@contact_info)
- 
-       @contact.save
-       @contact.contact_infos = []
-       @contact.save
-       @contact.reload
-       @contact.contact_infos.length.should == 0
-     end
-   end
+    before(:each) do
+      @contact = Insightly::Contact.new(20315449)
+      @contact.contact_infos = []
+      @contact.save
+
+      @contact_info = Insightly::ContactInfo.new
+      @contact_info.type = "PHONE"
+      @contact_info.label = "Work"
+      @contact_info.subtype = nil
+      @contact_info.detail = "bob@aol.com"
+
+    end
+    it "should allow you to update an contact_info" do
+      @contact.contact_infos.should == []
+      @contact.add_contact_info(@contact_info)
+
+      @contact.save
+      @contact_info.detail = "bobroberts@aol.com"
+      @contact.contact_infos = [@contact_info]
+      @contact.save
+      @contact.reload
+      @contact.contact_infos.length.should == 1
+      @contact.contact_infos.first.detail.should == "bobroberts@aol.com"
+    end
+    it "should allow you to add an contact_info" do
+
+
+      @contact.contact_infos.should == []
+      @contact.add_contact_info(@contact_info)
+
+      @contact.save
+      @contact.reload
+      @contact.contact_infos.length.should == 1
+      @contact.contact_infos.first.detail.should == "bob@aol.com"
+    end
+    it "should allow you to remove an contact_info" do
+
+      @contact.contact_infos.should == []
+      @contact.add_contact_info(@contact_info)
+
+      @contact.save
+      @contact.contact_infos = []
+      @contact.save
+      @contact.reload
+      @contact.contact_infos.length.should == 0
+
+    end
+    it "should allow you to clear all contact_infos" do
+      @contact.contact_infos.should == []
+      @contact.add_contact_info(@contact_info)
+
+      @contact.save
+      @contact.contact_infos = []
+      @contact.save
+      @contact.reload
+      @contact.contact_infos.length.should == 0
+    end
+  end
+  context "Links" do
+    before(:each) do
+      @contact = Insightly::Contact.new(20315449)
+      @contact.links = []
+      @contact.save
+
+
+      @link = Insightly::Link.add_organisation(8936117, "Employeer", "Handles payment")
+      # @link = Insightly::Link.add_opportunity(968613,"Janitor", "Recent Hire")
+    end
+    it "should allow you to update an link" do
+      @contact.links.should == []
+      @contact.add_link(@link)
+
+      @contact.save
+      @link = @contact.links.first
+      @link.details = "Old Veteran"
+      @contact.links = [@link]
+      @contact.save
+      @contact.reload
+      @contact.links.length.should == 1
+      @contact.links.first.details.should == "Old Veteran"
+    end
+    it "should allow you to add an link" do
+
+
+      @contact.links.should == []
+      @contact.add_link(@link)
+      @contact.add_link(@link)
+      @contact.links.length.should == 2
+      @contact.save
+      @contact.reload
+      @contact.links.length.should == 1
+      @contact.links.first.details.should == "Handles payment"
+    end
+    it "should allow you to remove an link" do
+
+      @contact.links.should == []
+      @contact.add_link(@link)
+
+      @contact.save
+      @contact.links = []
+      @contact.save
+      @contact.reload
+      @contact.links.length.should == 0
+
+    end
+    it "should allow you to clear all links" do
+      @contact.links.should == []
+      @contact.add_link(@link)
+
+      @contact.save
+      @contact.links = []
+      @contact.save
+      @contact.reload
+      @contact.links.length.should == 0
+    end
+  end
 end

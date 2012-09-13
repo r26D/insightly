@@ -180,4 +180,60 @@ describe Insightly::Organisation do
       @org.contact_infos.length.should == 0
     end
   end
+  context "Links" do
+    before(:each) do
+       @org = Insightly::Organisation.new(8936117)
+       @org.links = []
+       @org.save
+
+       @link = Insightly::Link.add_contact(2982194,"Janitor", "Recent Hire")
+      # @link = Insightly::Link.add_opportunity(968613,"Janitor", "Recent Hire")
+     end
+     it "should allow you to update an link" do
+       @org.links.should == []
+       @org.add_link(@link)
+
+       @org.save
+       @link = @org.links.first
+       @link.details = "Old Veteran"
+       @org.links = [@link]
+       @org.save
+       @org.reload
+       @org.links.length.should == 1
+       @org.links.first.details.should == "Old Veteran"
+     end
+     it "should allow you to add an link" do
+
+
+       @org.links.should == []
+       @org.add_link(@link)
+
+       @org.save
+       @org.reload
+       @org.links.length.should == 1
+       @org.links.first.details.should == "Recent Hire"
+     end
+     it "should allow you to remove an link" do
+
+       @org.links.should == []
+       @org.add_link(@link)
+
+       @org.save
+       @org.links = []
+       @org.save
+       @org.reload
+       @org.links.length.should == 0
+
+     end
+     it "should allow you to clear all links" do
+       @org.links.should == []
+       @org.add_link(@link)
+
+       @org.save
+       @org.links = []
+       @org.save
+       @org.reload
+       @org.links.length.should == 0
+     end
+  end
 end

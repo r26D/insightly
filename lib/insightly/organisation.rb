@@ -1,11 +1,8 @@
-#METODO be able to link to tasks
-#METODO be able to link to contacts
-#METODO be able to link to opportunities
-
 module Insightly
   class Organisation < ReadWrite
     include Insightly::AddressHelper
     include Insightly::ContactInfoHelper
+    include Insightly::LinkHelper
     self.url_base = "Organisations"
     CUSTOM_FIELD_PREFIX = "ORGANISATION_FIELD"
     api_field "ORGANISATION_ID",
@@ -32,8 +29,15 @@ module Insightly
       @data["ADDRESSES"] = []
       load(id) if id
     end
+
     def remote_id
       organisation_id
+    end
+
+    def fix_for_link(link)
+      #This needs to auto set the org id on the item
+      link.organisation_id = self.remote_id
+      link
     end
 
   end

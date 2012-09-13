@@ -1,7 +1,6 @@
-#METODO link an opportunity to a contact/organization
-#METODO Confirm that we can create an opportunity
 module Insightly
   class Opportunity < ReadWrite
+    include Insightly::LinkHelper
     self.url_base = "Opportunities"
     CUSTOM_FIELD_PREFIX = "OPPORTUNITY_FIELD"
     api_field "OPPORTUNITY_FIELD_10",
@@ -35,7 +34,6 @@ module Insightly
               "OPPORTUNITY_NAME",
               "OPPORTUNITY_ID",
               "VISIBLE_USER_IDS",
-              "LINKS",
               "RESPONSIBLE_USER_ID",
               "OPPORTUNITY_DETAILS"
 
@@ -111,5 +109,11 @@ module Insightly
       end
 
     end
+    def fix_for_link(link)
+       #This needs to auto set the org id on the item
+       link.opportunity_id = self.remote_id
+       link
+     end
   end
+
 end

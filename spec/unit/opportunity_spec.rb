@@ -207,5 +207,62 @@ describe Insightly::Opportunity do
     it "should set the reason to Created by API if you create an opportunity"
 
   end
-
+  context "Links" do
+     before(:each) do
+       @opportunity = Insightly::Opportunity.new(968613)
+       @opportunity.links = []
+       @opportunity.save
+ 
+ 
+       @link = Insightly::Link.add_organisation(8936117, "Employeer", "Handles payment")
+       # @link = Insightly::Link.add_contacty(20315449,"Janitor", "Recent Hire")
+     end
+     it "should allow you to update an link" do
+       @opportunity.links.should == []
+       @opportunity.add_link(@link)
+ 
+       @opportunity.save
+       @link = @opportunity.links.first
+       @link.details = "Old Veteran"
+       @opportunity.links = [@link]
+       @opportunity.save
+       @opportunity.reload
+       @opportunity.links.length.should == 1
+       @opportunity.links.first.details.should == "Old Veteran"
+     end
+     it "should allow you to add an link" do
+ 
+ 
+       @opportunity.links.should == []
+       @opportunity.add_link(@link)
+       @opportunity.add_link(@link)
+       @opportunity.links.length.should == 2
+       @opportunity.save
+       @opportunity.reload
+       @opportunity.links.length.should == 1
+       @opportunity.links.first.details.should == "Handles payment"
+     end
+     it "should allow you to remove an link" do
+ 
+       @opportunity.links.should == []
+       @opportunity.add_link(@link)
+ 
+       @opportunity.save
+       @opportunity.links = []
+       @opportunity.save
+       @opportunity.reload
+       @opportunity.links.length.should == 0
+ 
+     end
+     it "should allow you to clear all links" do
+       @opportunity.links.should == []
+       @opportunity.add_link(@link)
+ 
+       @opportunity.save
+       @opportunity.links = []
+       @opportunity.save
+       @opportunity.reload
+       @opportunity.links.length.should == 0
+     end
+   end
 end

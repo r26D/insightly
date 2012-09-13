@@ -7,6 +7,7 @@ require "active_support/core_ext"  #Needed for Hash.from_xml
 require 'insightly/address_helper'
 require 'insightly/contact_info_helper'
 require 'insightly/link_helper'
+require 'insightly/task_link_helper'
 
 
 require 'insightly/base'

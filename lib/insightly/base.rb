@@ -60,7 +60,9 @@ module Insightly
     def reload
       load(remote_id)
     end
-
+    def to_json
+       @data.to_json
+     end
     def build(data)
       @data = data
       self

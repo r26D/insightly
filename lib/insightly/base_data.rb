@@ -1,7 +1,7 @@
 module Insightly
   class BaseData
     class << self
-      attr_accessor :api_fields, :url_base
+      attr_accessor :api_fields
     end
     self.api_fields = []
 

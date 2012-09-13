@@ -170,4 +170,62 @@ describe Insightly::Task do
     @task.tasklinks = [@task_link.remote_data]
     @task.save
   end
+
+  context "TaskLinks" do
+     before(:each) do
+       @task = Insightly::Task.new(3263739)
+       @task.task_links = []
+       @task.save
+ 
+ 
+       @link = Insightly::TaskLink.add_organisation(8936117)
+       @link2 = Insightly::TaskLink.add_opportunity(968613)
+     end
+     it "should allow you to update an link" do
+       @task.task_links.should == []
+       @task.add_task_link(@link)
+ 
+       @task.save
+       @link = @task.task_links.first
+       @link2.task_link_id = @link.task_link_id
+       @task.task_links = [@link2]
+       @task.save
+       @task.reload
+       @task.task_links.length.should == 1
+       @task.task_links.first.opportunity_id.should == 968613
+     end
+     it "should allow you to add an link" do
+ 
+ 
+       @task.task_links.should == []
+       @task.add_task_link(@link)
+
+       @task.save
+       @task.reload
+       @task.task_links.length.should == 1
+       @task.task_links.first.organisation_id.should == 8936117
+     end
+     it "should allow you to remove an link" do
+ 
+       @task.task_links.should == []
+       @task.add_task_link(@link)
+ 
+       @task.save
+       @task.task_links = []
+       @task.save
+       @task.reload
+       @task.task_links.length.should == 0
+ 
+     end
+     it "should allow you to clear all links" do
+       @task.task_links.should == []
+       @task.add_task_link(@link)
+ 
+       @task.save
+       @task.task_links = []
+       @task.save
+       @task.reload
+       @task.task_links.length.should == 0
+     end
+   end
 end

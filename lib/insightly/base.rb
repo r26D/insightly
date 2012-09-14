@@ -2,13 +2,10 @@
 #METODO opportunity categories
 
 
-
-
-#METODO Currencies
 #METODO Tags/Contacts
 #METODO Tags/Organisations
 #METODO Tags/Opportunities
-#METODO TeamMembers
+
 #METODO CustomFields
 #METODO Relationships
 

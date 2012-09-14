@@ -33,4 +33,5 @@ require "insightly/team_member"
 require "insightly/relationship"
 require "insightly/opportunity_category"
 require "insightly/task_category"
+require "insightly/custom_field"
 

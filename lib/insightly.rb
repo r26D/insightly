@@ -31,4 +31,5 @@ require "insightly/country"
 require "insightly/currency"
 require "insightly/team_member"
 require "insightly/relationship"
+require "insightly/opportunity_category"
 

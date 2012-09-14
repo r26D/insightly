@@ -20,10 +20,30 @@ describe Insightly::Tag do
 
     @tag.remote_data.should == data
   end
-  #it "should be able to fetch all tags" do
-  #  Insightly::Tag.any_instance.stub(:get_collection).and_return(@all_tags.collect { |x| x.remote_data })
-  #  Insightly::Tag.all.should == @all_tags
-  #end
+  it "should be able to fetch all tags" do
+    Insightly::Tag.any_instance.stub(:get_collection).and_return(@all_tags.collect { |x| x.remote_data })
+    Insightly::Tag.all.should == @all_tags
+  end
+  it "should allow you to see tags by contact" do
+    Insightly::Tag.any_instance.stub(:get_collection).with("#{@tag.url_base}/Contacts").and_return([@tag.remote_data])
+    Insightly::Tag.contact_tags.should == [@tag]
+  end
+  it "should allow you to see tags by organisations" do
+    Insightly::Tag.any_instance.stub(:get_collection).with("#{@tag.url_base}/Organisations").and_return([@tag.remote_data])
+    Insightly::Tag.contact_tags.should == [@tag]
+  end
+  it "should allow you to see tags by opportunites" do
+    Insightly::Tag.any_instance.stub(:get_collection).with("#{@tag.url_base}/Opportunities").and_return([@tag.remote_data])
+    Insightly::Tag.contact_tags.should == [@tag]
+  end
+  it "should allow you to see tags by projects" do
+    Insightly::Tag.any_instance.stub(:get_collection).with("#{@tag.url_base}/Projects").and_return([@tag.remote_data])
+    Insightly::Tag.contact_tags.should == [@tag]
+  end
+  it "should allow you to see tags by emails" do
+    Insightly::Tag.any_instance.stub(:get_collection).with("#{@tag.url_base}/Emails").and_return([@tag.remote_data])
+    Insightly::Tag.contact_tags.should == [@tag]
+  end
   it "should allow you to build a tag from a string" do
     @tag = Insightly::Tag.build("Happy")
     @tag.tag_name.should == "Happy"

@@ -1,61 +1,67 @@
 module Insightly
-  class ContactInfo
-    def initialize
-      @data = {}
+  class ContactInfo < BaseData
+    api_field "CONTACT_INFO_ID",
+              "TYPE",
+              "SUBTYPE",
+              "LABEL",
+              "DETAIL"
+
+    def self.phone(label, number)
+      item = self.new
+      item.type = "PHONE"
+      item.label = label
+      item.detail = number
+      item
     end
 
-    def to_json
-      @data.to_json
-    end
-    def build(data)
-      @data = data
-      self
-    end
-
-    def self.build(data)
-      self.new.build(data)
+    def self.email(label, email)
+      item = self.new
+      item.type = "EMAIL"
+      item.label = label
+      item.detail = email
+      item
     end
 
-    def ==(other)
-      self.remote_data == other.remote_data
+    def self.social(label, info, subtype)
+      item = self.new
+      item.type = "SOCIAL"
+      item.subtype = subtype
+      item.label = label
+      item.detail = info
+      item
     end
 
-    def remote_data
-      @data
-    end
-    def contact_info_id
-      @data["CONTACT_INFO_ID"]
-
-    end
-    def type
-      @data["TYPE"]
-    end
-    def subtype
-      @data["SUBTYPE"]
-    end
-    def label
-      @data["LABEL"]
-    end
-    def detail
-      @data["DETAIL"]
+    def self.website(label, url)
+      item = self.new
+      item.type = "WEBSITE"
+      item.label = label
+      item.detail = url
+      item
     end
 
-    def contact_info_id=(value)
-      @data["CONTACT_INFO_ID"] = value
-
-    end
-    def type=(value)
-      @data["TYPE"] = value
-    end
-    def subtype=(value)
-      @data["SUBTYPE"] = value
-    end
-    def label=(value)
-      @data["LABEL"] = value
-    end
-    def detail=(value)
-      @data["DETAIL"] = value
+    def self.twitter_id(id)
+      self.social("TwitterID", id, "TwitterID")
     end
 
+    def self.linked_in(url)
+      self.social("LinkedInPublicProfileUrl", url, "LinkedInPublicProfileUrl")
+    end
+
+    def self.work_phone(number)
+      self.phone("Work", number)
+    end
+
+    def self.work_email(email)
+      self.email("Work", email)
+    end
+
+
+    def self.business_website(url)
+      self.website("Work", url)
+    end
+
+    def self.blog(url)
+      self.website("Blog", url)
+    end
   end
 end

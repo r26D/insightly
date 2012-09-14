@@ -1,3 +1,4 @@
+#METODO contacts allow you to set special dates to remember - can we access that via api?
 #METODO only allow build to set fields that are part of the API fields
 #METODO make a distinction between fields that you can set and save and ones you can only read - like DATE_UPDATED_UTC
 module Insightly

@@ -8,6 +8,7 @@ require 'insightly/address_helper'
 require 'insightly/contact_info_helper'
 require 'insightly/link_helper'
 require 'insightly/task_link_helper'
+require 'insightly/tag_helper'
 
 
 require 'insightly/base'
@@ -24,4 +25,5 @@ require 'insightly/opportunity_state_reason'
 require 'insightly/opportunity'
 require 'insightly/organisation'
 require "insightly/link"
+require "insightly/tag"
 

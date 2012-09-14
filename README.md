@@ -58,3 +58,11 @@ Organisation? Organization
 
 The documentation for Insight.ly the mixes the use of Organization and Organisation. Insight.ly spells it Organisation in urls and in the API - so we
 only use that spelling in the library.
+
+
+Custom Fields vs Tags
+=========
+
+Insight.ly supports both custom fields (up to 10 on Opportunities, Organisations, and Contacts). Opportunities, Organisations,
+ Contacts also support tags. What is the difference?   Custom fields allow you to put data on the item. This data shows up when you look
+ at the details page of that record. Tags show up in the summary list, and also allow you to search/sort by.

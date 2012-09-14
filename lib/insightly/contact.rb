@@ -3,6 +3,8 @@ module Insightly
     include Insightly::AddressHelper
     include Insightly::ContactInfoHelper
     include Insightly::LinkHelper
+    include Insightly::TagHelper
+
     self.url_base = "Contacts"
     CUSTOM_FIELD_PREFIX = "CONTACT_FIELD"
     api_field "CONTACT_ID",

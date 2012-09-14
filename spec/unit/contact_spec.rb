@@ -61,195 +61,259 @@ describe Insightly::Contact do
 #   @new_contact = Insightly::Contact.new(@contact.remote_id)
 #   @new_contact.last_name.should == @contact.last_name
 #end
-  context "addresses" do
+  context "connections" do
     before(:each) do
+
+
       @contact = Insightly::Contact.new(20315449)
+
+      @contact.contact_infos = []
+      @contact.links = []
+      @contact.tags = []
       @contact.addresses = []
       @contact.save
-
-      @address = Insightly::Address.new
-      @address.address_type = "Work"
-      @address.street = "123 Main St"
-      @address.city = "Indianpolis"
-      @address.state = "IN"
-      @address.postcode = "46112"
-      @address.country = "US"
-    end
-    it "should allow you to update an address" do
-      @contact.addresses.should == []
-      @contact.add_address(@address)
-
-      @contact.save
-      @address = @contact.addresses.first
-      @address.state = "TX"
-      @contact.addresses = [@address]
-      @contact.addresses.length.should == 1
-
-      @contact.save
-
-      @contact.reload
-
-      @contact.addresses.length.should == 1
-      @contact.addresses.first.state.should == "TX"
-    end
-    it "should allow you to add an address" do
-
-
-      @contact.addresses.should == []
-      @contact.add_address(@address)
-
-      @contact.save
-      @contact.reload
-      @contact.addresses.length.should == 1
-      @contact.addresses.first.street.should == "123 Main St"
-    end
-    it "should allow you to remove an address" do
-
-      @contact.addresses.should == []
-      @contact.add_address(@address)
-
-      @contact.save
-      @contact.addresses = []
-      @contact.save
-      @contact.reload
-      @contact.addresses.length.should == 0
-
-    end
-    it "should allow you to clear all addresses" do
-      @contact.addresses.should == []
-      @contact.add_address(@address)
-
-      @contact.save
-      @contact.addresses = []
-      @contact.save
-      @contact.reload
-      @contact.addresses.length.should == 0
     end
 
-    it "should not add an address if the same address is already on the organization" do
 
-      @contact.addresses.should == []
-      @contact.add_address(@address)
+    context "addresses" do
+      before(:each) do
 
-      @contact.add_address(@address)
-      @contact.addresses.length.should == 1
+
+        @address = Insightly::Address.new
+        @address.address_type = "Work"
+        @address.street = "123 Main St"
+        @address.city = "Indianpolis"
+        @address.state = "IN"
+        @address.postcode = "46112"
+        @address.country = "US"
+      end
+      it "should allow you to update an address" do
+        @contact.addresses.should == []
+        @contact.add_address(@address)
+
+        @contact.save
+        @address = @contact.addresses.first
+        @address.state = "TX"
+        @contact.addresses = [@address]
+        @contact.addresses.length.should == 1
+
+        @contact.save
+
+        @contact.reload
+
+        @contact.addresses.length.should == 1
+        @contact.addresses.first.state.should == "TX"
+      end
+      it "should allow you to add an address" do
+
+
+        @contact.addresses.should == []
+        @contact.add_address(@address)
+
+        @contact.save
+        @contact.reload
+        @contact.addresses.length.should == 1
+        @contact.addresses.first.street.should == "123 Main St"
+      end
+      it "should allow you to remove an address" do
+
+        @contact.addresses.should == []
+        @contact.add_address(@address)
+
+        @contact.save
+        @contact.addresses = []
+        @contact.save
+        @contact.reload
+        @contact.addresses.length.should == 0
+
+      end
+      it "should allow you to clear all addresses" do
+        @contact.addresses.should == []
+        @contact.add_address(@address)
+
+        @contact.save
+        @contact.addresses = []
+        @contact.save
+        @contact.reload
+        @contact.addresses.length.should == 0
+      end
+
+      it "should not add an address if the same address is already on the organization" do
+
+        @contact.addresses.should == []
+        @contact.add_address(@address)
+
+        @contact.add_address(@address)
+        @contact.addresses.length.should == 1
+      end
+    end
+    context "contact_infos" do
+      before(:each) do
+
+        @contact_info = Insightly::ContactInfo.new
+        @contact_info.type = "PHONE"
+        @contact_info.label = "Work"
+        @contact_info.subtype = nil
+        @contact_info.detail = "bob@aol.com"
+
+      end
+      it "should allow you to update an contact_info" do
+        @contact.contact_infos.should == []
+        @contact.add_contact_info(@contact_info)
+
+        @contact.save
+        @contact_info.detail = "bobroberts@aol.com"
+        @contact.contact_infos = [@contact_info]
+        @contact.save
+        @contact.reload
+        @contact.contact_infos.length.should == 1
+        @contact.contact_infos.first.detail.should == "bobroberts@aol.com"
+      end
+      it "should allow you to add an contact_info" do
+
+
+        @contact.contact_infos.should == []
+        @contact.add_contact_info(@contact_info)
+
+        @contact.save
+        @contact.reload
+        @contact.contact_infos.length.should == 1
+        @contact.contact_infos.first.detail.should == "bob@aol.com"
+      end
+      it "should allow you to remove an contact_info" do
+
+        @contact.contact_infos.should == []
+        @contact.add_contact_info(@contact_info)
+
+        @contact.save
+        @contact.contact_infos = []
+        @contact.save
+        @contact.reload
+        @contact.contact_infos.length.should == 0
+
+      end
+      it "should allow you to clear all contact_infos" do
+        @contact.contact_infos.should == []
+        @contact.add_contact_info(@contact_info)
+
+        @contact.save
+        @contact.contact_infos = []
+        @contact.save
+        @contact.reload
+        @contact.contact_infos.length.should == 0
+      end
+    end
+    context "Links" do
+      before(:each) do
+
+
+        @link = Insightly::Link.add_organisation(8936117, "Employeer", "Handles payment")
+        # @link = Insightly::Link.add_opportunity(968613,"Janitor", "Recent Hire")
+      end
+      it "should allow you to update an link" do
+        @contact.links.should == []
+        @contact.add_link(@link)
+
+        @contact.save
+        @link = @contact.links.first
+        @link.details = "Old Veteran"
+        @contact.links = [@link]
+        @contact.save
+        @contact.reload
+        @contact.links.length.should == 1
+        @contact.links.first.details.should == "Old Veteran"
+      end
+      it "should allow you to add an link" do
+
+
+        @contact.links.should == []
+        @contact.add_link(@link)
+        @contact.add_link(@link)
+        @contact.links.length.should == 2
+        @contact.save
+        @contact.reload
+        @contact.links.length.should == 1
+        @contact.links.first.details.should == "Handles payment"
+      end
+      it "should allow you to remove an link" do
+
+        @contact.links.should == []
+        @contact.add_link(@link)
+
+        @contact.save
+        @contact.links = []
+        @contact.save
+        @contact.reload
+        @contact.links.length.should == 0
+
+      end
+      it "should allow you to clear all links" do
+        @contact.links.should == []
+        @contact.add_link(@link)
+
+        @contact.save
+        @contact.links = []
+        @contact.save
+        @contact.reload
+        @contact.links.length.should == 0
+      end
+    end
+    context "Tags" do
+      before(:each) do
+
+        @tag = Insightly::Tag.build("Paying Customer")
+        @tag2 = Insightly::Tag.build("Freebie")
+
+      end
+      it "should allow you to update an tag" do
+        @contact.tags.should == []
+        @contact.add_tag(@tag)
+        @tags = @contact.tags
+
+        @contact.save
+        @tag = @contact.tags.first
+        @tag.tag_name = "Old Veteran"
+        @contact.tags = [@tag]
+        @contact.save
+        @contact.reload
+        @contact.tags.length.should == 1
+        @contact.tags.first.tag_name.should == "Old Veteran"
+      end
+      it "should allow you to add an tag" do
+
+
+        @contact.tags.should == []
+        @contact.add_tag(@tag)
+        @contact.add_tag(@tag)
+        @contact.tags.length.should == 2
+        @contact.save
+        @contact.reload
+        @contact.tags.length.should == 1
+        @contact.tags.first.tag_name.should == "Paying Customer"
+      end
+      it "should allow you to remove an tag" do
+
+        @contact.tags.should == []
+        @contact.add_tag(@tag)
+
+        @contact.save
+        @contact.tags = []
+        @contact.save
+        @contact.reload
+        @contact.tags.length.should == 0
+
+      end
+      it "should allow you to clear all tags" do
+        @contact.tags.should == []
+        @contact.add_tag(@tag)
+
+        @contact.save
+        @contact.tags = []
+        @contact.save
+        @contact.reload
+        @contact.tags.length.should == 0
+      end
     end
   end
-  context "contact_infos" do
-    before(:each) do
-      @contact = Insightly::Contact.new(20315449)
-      @contact.contact_infos = []
-      @contact.save
 
-      @contact_info = Insightly::ContactInfo.new
-      @contact_info.type = "PHONE"
-      @contact_info.label = "Work"
-      @contact_info.subtype = nil
-      @contact_info.detail = "bob@aol.com"
-
-    end
-    it "should allow you to update an contact_info" do
-      @contact.contact_infos.should == []
-      @contact.add_contact_info(@contact_info)
-
-      @contact.save
-      @contact_info.detail = "bobroberts@aol.com"
-      @contact.contact_infos = [@contact_info]
-      @contact.save
-      @contact.reload
-      @contact.contact_infos.length.should == 1
-      @contact.contact_infos.first.detail.should == "bobroberts@aol.com"
-    end
-    it "should allow you to add an contact_info" do
-
-
-      @contact.contact_infos.should == []
-      @contact.add_contact_info(@contact_info)
-
-      @contact.save
-      @contact.reload
-      @contact.contact_infos.length.should == 1
-      @contact.contact_infos.first.detail.should == "bob@aol.com"
-    end
-    it "should allow you to remove an contact_info" do
-
-      @contact.contact_infos.should == []
-      @contact.add_contact_info(@contact_info)
-
-      @contact.save
-      @contact.contact_infos = []
-      @contact.save
-      @contact.reload
-      @contact.contact_infos.length.should == 0
-
-    end
-    it "should allow you to clear all contact_infos" do
-      @contact.contact_infos.should == []
-      @contact.add_contact_info(@contact_info)
-
-      @contact.save
-      @contact.contact_infos = []
-      @contact.save
-      @contact.reload
-      @contact.contact_infos.length.should == 0
-    end
-  end
-  context "Links" do
-    before(:each) do
-      @contact = Insightly::Contact.new(20315449)
-      @contact.links = []
-      @contact.save
-
-
-      @link = Insightly::Link.add_organisation(8936117, "Employeer", "Handles payment")
-      # @link = Insightly::Link.add_opportunity(968613,"Janitor", "Recent Hire")
-    end
-    it "should allow you to update an link" do
-      @contact.links.should == []
-      @contact.add_link(@link)
-
-      @contact.save
-      @link = @contact.links.first
-      @link.details = "Old Veteran"
-      @contact.links = [@link]
-      @contact.save
-      @contact.reload
-      @contact.links.length.should == 1
-      @contact.links.first.details.should == "Old Veteran"
-    end
-    it "should allow you to add an link" do
-
-
-      @contact.links.should == []
-      @contact.add_link(@link)
-      @contact.add_link(@link)
-      @contact.links.length.should == 2
-      @contact.save
-      @contact.reload
-      @contact.links.length.should == 1
-      @contact.links.first.details.should == "Handles payment"
-    end
-    it "should allow you to remove an link" do
-
-      @contact.links.should == []
-      @contact.add_link(@link)
-
-      @contact.save
-      @contact.links = []
-      @contact.save
-      @contact.reload
-      @contact.links.length.should == 0
-
-    end
-    it "should allow you to clear all links" do
-      @contact.links.should == []
-      @contact.add_link(@link)
-
-      @contact.save
-      @contact.links = []
-      @contact.save
-      @contact.reload
-      @contact.links.length.should == 0
-    end
-  end
 end

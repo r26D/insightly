@@ -44,36 +44,36 @@ describe Insightly::Opportunity do
   end
   it "should be able to create a opportunity" do
     Insightly::Configuration.custom_fields_for_opportunities(:dummy1,
-    	:admin_url,
-    	:phone_number,
-    	:timezone,
-    	:plan,
-    	:organization,
-    	:company_name,
-    	:contact_name)
+                                                             :admin_url,
+                                                             :phone_number,
+                                                             :timezone,
+                                                             :plan,
+                                                             :organization,
+                                                             :company_name,
+                                                             :contact_name)
 
-  o = Insightly::Opportunity.new
-  o.opportunity_state = "Open"
-  o.visible_to = "EVERYONE"
-  o.stage_id = "71162"
-  o.forecast_close_date = "2012-10-05 00:00:00"
-  o.responsible_user_id = "226277"
-  o.bid_currency = "USD"
-  o.opportunity_details = "This is the description"
-  o.category_id = "628187" #First plan list
-  o.bid_amount = "75"
-  o.pipeline_id = "24377"
-  o.opportunity_name = "Sample Opportunity 3"
-  o.contact_name = "Dirk ELmendorf"
-  o.company_name = "r26D"
-  o.organization = "TruckingOffice"
-  o.plan = "Owner/Operator"
-  o.timezone = "Central"
-  o.phone_number = "210-555-1212"
-  o.admin_url = "https://admin/companies/122"
-  o.bid_type = "Fixed Bid"
-  o.owner_user_id = "226277"
-  o.save
+    o = Insightly::Opportunity.new
+    o.opportunity_state = "Open"
+    o.visible_to = "EVERYONE"
+    o.stage_id = "71162"
+    o.forecast_close_date = "2012-10-05 00:00:00"
+    o.responsible_user_id = "226277"
+    o.bid_currency = "USD"
+    o.opportunity_details = "This is the description"
+    o.category_id = "628187" #First plan list
+    o.bid_amount = "75"
+    o.pipeline_id = "24377"
+    o.opportunity_name = "Sample Opportunity 3"
+    o.contact_name = "Dirk ELmendorf"
+    o.company_name = "r26D"
+    o.organization = "TruckingOffice"
+    o.plan = "Owner/Operator"
+    o.timezone = "Central"
+    o.phone_number = "210-555-1212"
+    o.admin_url = "https://admin/companies/122"
+    o.bid_type = "Fixed Bid"
+    o.owner_user_id = "226277"
+    o.save
   end
   it "should have a url base" do
     @opportunity.url_base.should == "Opportunities"
@@ -96,7 +96,7 @@ describe Insightly::Opportunity do
       @opportunity.send(f.downcase.to_sym).should == @opportunity.remote_data[f]
       @opportunity.send("#{f.downcase}=".to_sym, "Bob")
       @opportunity.send(f.downcase.to_sym).should == "Bob"
-    @opportunity.remote_data[f].should == "Bob"
+      @opportunity.remote_data[f].should == "Bob"
     end
   end
   it "should allow you to define custom field labels" do
@@ -141,7 +141,7 @@ describe Insightly::Opportunity do
 
     end
     it "should find all the names that match" do
-  Insightly::Opportunity.search_by_name("Apple").should == [@opp1, @opp2]
+      Insightly::Opportunity.search_by_name("Apple").should == [@opp1, @opp2]
     end
     it "should return an empty array if there are not matches" do
       Insightly::Opportunity.search_by_name("Cobra").should == []
@@ -207,62 +207,124 @@ describe Insightly::Opportunity do
     it "should set the reason to Created by API if you create an opportunity"
 
   end
-  context "Links" do
-     before(:each) do
-       @opportunity = Insightly::Opportunity.new(968613)
-       @opportunity.links = []
-       @opportunity.save
- 
- 
-       @link = Insightly::Link.add_organisation(8936117, "Employeer", "Handles payment")
-       # @link = Insightly::Link.add_contacty(20315449,"Janitor", "Recent Hire")
-     end
-     it "should allow you to update an link" do
-       @opportunity.links.should == []
-       @opportunity.add_link(@link)
- 
-       @opportunity.save
-       @link = @opportunity.links.first
-       @link.details = "Old Veteran"
-       @opportunity.links = [@link]
-       @opportunity.save
-       @opportunity.reload
-       @opportunity.links.length.should == 1
-       @opportunity.links.first.details.should == "Old Veteran"
-     end
-     it "should allow you to add an link" do
- 
- 
-       @opportunity.links.should == []
-       @opportunity.add_link(@link)
-       @opportunity.add_link(@link)
-       @opportunity.links.length.should == 2
-       @opportunity.save
-       @opportunity.reload
-       @opportunity.links.length.should == 1
-       @opportunity.links.first.details.should == "Handles payment"
-     end
-     it "should allow you to remove an link" do
- 
-       @opportunity.links.should == []
-       @opportunity.add_link(@link)
- 
-       @opportunity.save
-       @opportunity.links = []
-       @opportunity.save
-       @opportunity.reload
-       @opportunity.links.length.should == 0
- 
-     end
-     it "should allow you to clear all links" do
-       @opportunity.links.should == []
-       @opportunity.add_link(@link)
- 
-       @opportunity.save
-       @opportunity.links = []
-       @opportunity.save
-       @opportunity.reload
-       @opportunity.links.length.should == 0
-     end
-   end
+  context "connections" do
+    before(:each) do
+      @opportunity = Insightly::Opportunity.new(968613)
+      @opportunity.links = []
+      @opportunity.tags = []
+      @opportunity.save
+    end
+
+    context "Links" do
+      before(:each) do
+
+
+        @link = Insightly::Link.add_organisation(8936117, "Employeer", "Handles payment")
+        # @link = Insightly::Link.add_contacty(20315449,"Janitor", "Recent Hire")
+      end
+      it "should allow you to update an link" do
+        @opportunity.links.should == []
+        @opportunity.add_link(@link)
+
+        @opportunity.save
+        @link = @opportunity.links.first
+        @link.details = "Old Veteran"
+        @opportunity.links = [@link]
+        @opportunity.save
+        @opportunity.reload
+        @opportunity.links.length.should == 1
+        @opportunity.links.first.details.should == "Old Veteran"
+      end
+      it "should allow you to add an link" do
+
+
+        @opportunity.links.should == []
+        @opportunity.add_link(@link)
+        @opportunity.add_link(@link)
+        @opportunity.links.length.should == 2
+        @opportunity.save
+        @opportunity.reload
+        @opportunity.links.length.should == 1
+        @opportunity.links.first.details.should == "Handles payment"
+      end
+      it "should allow you to remove an link" do
+
+        @opportunity.links.should == []
+        @opportunity.add_link(@link)
+
+        @opportunity.save
+        @opportunity.links = []
+        @opportunity.save
+        @opportunity.reload
+        @opportunity.links.length.should == 0
+
+      end
+      it "should allow you to clear all links" do
+        @opportunity.links.should == []
+        @opportunity.add_link(@link)
+
+        @opportunity.save
+        @opportunity.links = []
+        @opportunity.save
+        @opportunity.reload
+        @opportunity.links.length.should == 0
+      end
+    end
+    context "Tags" do
+      before(:each) do
+
+        @tag = Insightly::Tag.build("Paying Customer")
+        @tag2 = Insightly::Tag.build("Freebie")
+
+      end
+      it "should allow you to update an tag" do
+        @opportunity.tags.should == []
+        @opportunity.add_tag(@tag)
+        @tags = @opportunity.tags
+
+        @opportunity.save
+        @tag = @opportunity.tags.first
+        @tag.tag_name = "Old Veteran"
+        @opportunity.tags = [@tag]
+        @opportunity.save
+        @opportunity.reload
+        @opportunity.tags.length.should == 1
+        @opportunity.tags.first.tag_name.should == "Old Veteran"
+      end
+      it "should allow you to add an tag" do
+
+
+        @opportunity.tags.should == []
+        @opportunity.add_tag(@tag)
+        @opportunity.add_tag(@tag)
+        @opportunity.tags.length.should == 2
+        @opportunity.save
+        @opportunity.reload
+        @opportunity.tags.length.should == 1
+        @opportunity.tags.first.tag_name.should == "Paying Customer"
+      end
+      it "should allow you to remove an tag" do
+
+        @opportunity.tags.should == []
+        @opportunity.add_tag(@tag)
+
+        @opportunity.save
+        @opportunity.tags = []
+        @opportunity.save
+        @opportunity.reload
+        @opportunity.tags.length.should == 0
+
+      end
+      it "should allow you to clear all tags" do
+        @opportunity.tags.should == []
+        @opportunity.add_tag(@tag)
+
+        @opportunity.save
+        @opportunity.tags = []
+        @opportunity.save
+        @opportunity.reload
+        @opportunity.tags.length.should == 0
+      end
+    end
+  end
 end

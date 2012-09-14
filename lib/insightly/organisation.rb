@@ -3,6 +3,8 @@ module Insightly
     include Insightly::AddressHelper
     include Insightly::ContactInfoHelper
     include Insightly::LinkHelper
+    include Insightly::TagHelper
+
     self.url_base = "Organisations"
     CUSTOM_FIELD_PREFIX = "ORGANISATION_FIELD"
     api_field "ORGANISATION_ID",

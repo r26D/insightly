@@ -1,4 +1,17 @@
-#METODO look at tags vs custom fields
+#METODO task categories
+#METODO opportunity categories
+#METODO Users
+#METODO Countries
+#METODO Currencies
+#METODO Tags/Contacts
+#METODO Tags/Organisations
+#METODO Tags/Opportunities
+#METODO TeamMembers
+#METODO CustomFields
+#METODO Relationships
+
+
+
 #METODO only allow build to set fields that are part of the API fields
 #METODO make a distinction between fields that you can set and save and ones you can only read - like DATE_UPDATED_UTC
 module Insightly

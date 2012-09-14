@@ -1,6 +1,7 @@
 module Insightly
   class Opportunity < ReadWrite
     include Insightly::LinkHelper
+    include Insightly::TagHelper
     self.url_base = "Opportunities"
     CUSTOM_FIELD_PREFIX = "OPPORTUNITY_FIELD"
     api_field "OPPORTUNITY_FIELD_10",
@@ -23,7 +24,6 @@ module Insightly
               "PIPELINE_ID",
               "CATEGORY_ID",
               "PROBABILITY",
-              "TAGS",
               "IMAGE_URL",
               "BID_AMOUNT",
               "VISIBLE_TEAM_ID",

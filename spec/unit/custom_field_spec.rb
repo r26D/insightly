@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + "/../spec_helper")
 
-describe Insightly::OpportunityStateReason do
+describe Insightly::CustomField do
   before(:each) do
     Insightly::Configuration.api_key = INSIGHTLY_API_KEY
     Insightly::Configuration.logger = Insightly::Configuration._debug_logger
@@ -37,7 +37,7 @@ describe Insightly::OpportunityStateReason do
 
   end
   it "should get the custom_field id" do
-    @custom_field.custom_field_id.should == 1
+    @custom_field.custom_field_id.should == "OPPORTUNITY_FIELD_1"
   end
   it "should have a remote id" do
     @custom_field.remote_id.should == @custom_field.custom_field_id

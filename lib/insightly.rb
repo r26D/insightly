@@ -28,4 +28,5 @@ require "insightly/link"
 require "insightly/tag"
 require "insightly/user"
 require "insightly/country"
+require "insightly/currency"
 

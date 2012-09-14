@@ -6,9 +6,16 @@ describe Insightly::Country do
     Insightly::Configuration.logger = Insightly::Configuration._debug_logger
     @country = Insightly::Country.build({"COUNTRY_NAME" => "United States"})
     @country2 = Insightly::Country.build({"COUNTRY_NAME" => "Canada"})
+    @all_countries = [@country, @country2]
   end
   it "should have a url base" do
     Insightly::Country.new.url_base.should == "Countries"
+  end
+  it "should be able to fetch all of the countries" do
+
+      Insightly::Country.any_instance.stub(:get_collection).and_return(@all_countries.collect { |x| x.remote_data })
+      Insightly::Country.all.should == @all_countries
+
   end
   it "should allow you to build a coutnry from a string" do
     @country = Insightly::Country.build("India")

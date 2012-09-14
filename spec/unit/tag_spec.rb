@@ -6,6 +6,10 @@ describe Insightly::Tag do
     @tag = Insightly::Tag.build({
           "TAG_NAME" => "Happy"
       })
+    @tag2 = Insightly::Tag.build({
+          "TAG_NAME" => "Happy"
+      })
+    @all_tags = [@tag, @tag2]
   end
   it "should be able to build an tag from data" do
     data = {
@@ -16,6 +20,10 @@ describe Insightly::Tag do
 
     @tag.remote_data.should == data
   end
+  #it "should be able to fetch all tags" do
+  #  Insightly::Tag.any_instance.stub(:get_collection).and_return(@all_tags.collect { |x| x.remote_data })
+  #  Insightly::Tag.all.should == @all_tags
+  #end
   it "should allow you to build a tag from a string" do
     @tag = Insightly::Tag.build("Happy")
     @tag.tag_name.should == "Happy"

@@ -10,7 +10,7 @@ module Insightly
                "FIELD_TYPE",
                "FIELD_FOR"
     def initialize(id = nil)
-      @data = {"CUSTOM_FIELD_OPTIONS" = []}
+      @data = {"CUSTOM_FIELD_OPTIONS" => []}
       load(id) if id
     end
     def remote_id

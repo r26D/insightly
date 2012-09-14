@@ -27,4 +27,5 @@ require 'insightly/organisation'
 require "insightly/link"
 require "insightly/tag"
 require "insightly/user"
+require "insightly/country"
 

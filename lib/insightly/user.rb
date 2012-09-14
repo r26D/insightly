@@ -16,25 +16,31 @@ module Insightly
     def remote_id
       self.user_id
     end
-
-    def self.find_by_email(email)
-      User.all.collect.each do |x|
-        x if x.email && x.email.match(email)
-      end
+    def self.find_all_by_email(email)
+      User.all.collect {|x| x if x.email_address && x.email_address.match(email)}.compact
     end
-
-    def self.find_by_name(name)
-      User.all.collect.each do |x|
-        x if x.name && x.name.match(name)
+    def self.find_by_email(email)
+      User.all.each do |x|
+        return x if x.email_address && x.email_address.match(email)
       end
+      nil
+    end
+    def self.find_all_by_name(name)
+      User.all.collect {|x|  x if x.name && x.name.match(name) }.compact
+
+    end
+    def self.find_by_name(name)
+      User.all.collect do |x|
+        return x if x.name && x.name.match(name)
+      end
+      nil
     end
     def name
-      return "" if !self.first_name.nil? && !self.last_name.nil? && self.first.name.empty? && self.last_name.empty?
-      "#{self.first_name} #{self.last_name}".strip
+           "#{self.first_name} #{self.last_name}".strip
     end
     def last_name_first
-      return "" if !self.first_name.nil? && !self.last_name.nil? && self.first.name.empty? && self.last_name.empty?
-      "#{self.last_name} #{self.first_name}".strip
+      result = "#{self.last_name},#{self.first_name}".strip
+      result == "," ? "" : result
     end
   end
 end

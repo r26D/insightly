@@ -1,6 +1,7 @@
 module Insightly
   module AddressHelper
     def addresses
+      return [] if !@data["ADDRESSES"]
          @data["ADDRESSES"].collect {|a| Insightly::Address.build(a)}
      end
      def addresses=(list)

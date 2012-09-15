@@ -1,6 +1,7 @@
 module Insightly
   module ContactInfoHelper
     def contact_infos
+      return [] if !@data["CONTACTINFOS"]
          @data["CONTACTINFOS"].collect {|a| Insightly::ContactInfo.build(a)}
      end
      def contact_infos=(list)

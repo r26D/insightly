@@ -1,6 +1,7 @@
 module Insightly
   module TagHelper
     def tags
+      return [] if !@data["TAGS"]
          @data["TAGS"].collect {|a| Insightly::Tag.build(a)}
      end
      def tags=(list)

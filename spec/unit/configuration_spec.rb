@@ -47,4 +47,16 @@ describe Insightly::Configuration do
     Insightly::Configuration.custom_fields_for_opportunities(:rank, :branch_of_service)
 
   end
+  it "should be able to set custom fields for contacts" do
+    Insightly::Contact.should_receive(:custom_fields).with(:rank, :branch_of_service)
+
+    Insightly::Configuration.custom_fields_for_contacts(:rank, :branch_of_service)
+
+  end
+  it "should be able to set custom fields for organisations" do
+    Insightly::Organisation.should_receive(:custom_fields).with(:rank, :branch_of_service)
+
+    Insightly::Configuration.custom_fields_for_organisations(:rank, :branch_of_service)
+
+  end
 end

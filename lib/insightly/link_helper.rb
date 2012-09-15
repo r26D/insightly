@@ -7,6 +7,7 @@ module Insightly
        @data["LINKS"] = list.collect {|a| fix_for_link(a).remote_data}
      end
      def add_link(link)
+       @data["LINKS"] ||= []
        @data["LINKS"] << fix_for_link(link).remote_data
        true
      end

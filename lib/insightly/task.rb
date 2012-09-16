@@ -1,3 +1,5 @@
+#METODO make it so you can just say task.add_contact(contact/contact_id) (for opportunity and organisation as well)
+#METODO warn them about how you have to save a task before you can link it up
 module Insightly
   class Task < ReadWrite
     include Insightly::TaskLinkHelper

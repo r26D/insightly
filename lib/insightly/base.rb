@@ -1,4 +1,7 @@
 #METODO contacts allow you to set special dates to remember - can we access that via api?
+#METODO custom fields expect text,drop down, or date - add better handling (text should cast to_s)
+#METODO contact infos should auto filter out duplicate entries
+#METODO all the helpers should auto filter out duplicates (links,contact info,address etc)
 #METODO only allow build to set fields that are part of the API fields
 #METODO make a distinction between fields that you can set and save and ones you can only read - like DATE_UPDATED_UTC
 module Insightly

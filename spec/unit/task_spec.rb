@@ -173,13 +173,19 @@ describe Insightly::Task do
 
   context "TaskLinks" do
      before(:each) do
-       @task = Insightly::Task.new(3263739)
+      # @task = Insightly::Task.new(3263739)
+        @task = Insightly::Task.new
        @task.task_links = []
-       @task.save
+      # @task.save
  
  
        @link = Insightly::TaskLink.add_organisation(8936117)
        @link2 = Insightly::TaskLink.add_opportunity(968613)
+     end
+     it "should allow you to try to set it to nil" do
+       @task = Insightly::Task.new
+       @task.task_links = nil
+       @task.task_links.should == []
      end
      it "should allow you to update an link" do
        @task.task_links.should == []

@@ -6,7 +6,7 @@ module Insightly
     end
 
     def contact_infos=(list)
-      @data["CONTACTINFOS"] = list.collect { |a| a.remote_data }
+      @data["CONTACTINFOS"] = list ?  list.collect { |a| a.remote_data }  : []
     end
 
     def add_contact_info(contact_info)

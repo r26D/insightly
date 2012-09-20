@@ -44,7 +44,7 @@ describe Insightly::Organisation do
   #
   #  @organisation.visible_to = "EVERYONE"
   #  @organisation.organisation_name = "000 Dummy Test Org"
-  #  @organisation.background =  "This organisation was created for test purposes and can be deleted."
+  #  @organisation.background =  "This organisation was crtaskeated for test purposes and can be deleted."
   #
   #  @organisation.save
   #
@@ -74,6 +74,10 @@ describe Insightly::Organisation do
         @address.state = "IN"
         @address.postcode = "46112"
         @address.country = "US"
+      end
+      it "should let you set it to nil" do
+        @org.addresses = nil
+        @org.addresses.should == []
       end
       it "should allow you to update an address" do
         @org.addresses.should == []
@@ -142,6 +146,10 @@ describe Insightly::Organisation do
         @contact_info.detail = "bob@aol.com"
 
       end
+      it "should let you set it to nil" do
+         @org.contact_infos = nil
+         @org.contact_infos.should == []
+       end
       it "should allow you to update an contact_info" do
         @org.contact_infos.should == []
         @org.add_contact_info(@contact_info)
@@ -195,6 +203,10 @@ describe Insightly::Organisation do
         @link = Insightly::Link.add_contact(2982194, "Janitor", "Recent Hire")
         # @link = Insightly::Link.add_opportunity(968613,"Janitor", "Recent Hire")
       end
+      it "should let you set it to nil" do
+         @org.links = nil
+         @org.links.should == []
+       end
       it "should allow you to update an link" do
         @org.links.should == []
         @org.add_link(@link)
@@ -249,6 +261,10 @@ describe Insightly::Organisation do
         @tag2 = Insightly::Tag.build("Freebie")
 
       end
+      it "should let you set it to nil" do
+         @org.tags = nil
+         @org.tags.should == []
+       end
       it "should allow you to update an tag" do
         @org.tags.should == []
         @org.add_tag(@tag)

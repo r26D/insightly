@@ -5,7 +5,7 @@ module Insightly
          @data["TAGS"].collect {|a| Insightly::Tag.build(a)}
      end
      def tags=(list)
-       @data["TAGS"] = list.collect {|a| a.remote_data}
+       @data["TAGS"] = list ? list.collect {|a| a.remote_data} : []
      end
      def add_tag(tag)
        @data["TAGS"]  ||= []

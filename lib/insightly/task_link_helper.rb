@@ -5,7 +5,7 @@ module Insightly
          @data["TASKLINKS"].collect {|a| Insightly::TaskLink.build(a)}
      end
      def task_links=(list)
-       @data["TASKLINKS"] = list.collect {|a| fix_for_link(a).remote_data}
+       @data["TASKLINKS"] = list ? list.collect {|a| fix_for_link(a).remote_data} : []
      end
      def add_task_link(link)
        @data["TASKLINKS"] ||= []

@@ -4,7 +4,7 @@ module Insightly
   module Version
     Major = 0
     Minor = 2
-    Tiny = 6
+    Tiny = 7
     String = "#{Major}.#{Minor}.#{Tiny}"
   end
 end

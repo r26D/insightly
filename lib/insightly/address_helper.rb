@@ -1,13 +1,14 @@
 module Insightly
   module AddressHelper
     def addresses
+      return [] if !@data["ADDRESSES"]
          @data["ADDRESSES"].collect {|a| Insightly::Address.build(a)}
      end
      def addresses=(list)
        @data["ADDRESSES"] = list.collect {|a| a.remote_data}
      end
      def add_address(address)
-
+       @data["ADDRESSES"] ||= []
        @data["ADDRESSES"].each do |a|
          if  address.same_address?(Insightly::Address.build(a))
 

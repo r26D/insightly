@@ -39,6 +39,12 @@ module Insightly
     def self.custom_fields_for_opportunities(*args)
       Insightly::Opportunity.custom_fields(*args)
     end
+    def self.custom_fields_for_organisations(*args)
+      Insightly::Organisation.custom_fields(*args)
+    end
+    def self.custom_fields_for_contacts(*args)
+      Insightly::Contact.custom_fields(*args)
+    end
 
     def self.logger
       @logger ||= _default_logger

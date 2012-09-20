@@ -1,4 +1,8 @@
 #METODO contacts allow you to set special dates to remember - can we access that via api?
+#METODO It should have a method for converting date/time to the Insightly format
+#METODO custom fields expect text,drop down, or date - add better handling (text should cast to_s)
+#METODO contact infos should auto filter out duplicate entries
+#METODO all the helpers should auto filter out duplicates (links,contact info,address etc)
 #METODO only allow build to set fields that are part of the API fields
 #METODO Fix all tests so they don't require the existence of certain object ids
 

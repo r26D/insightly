@@ -1,7 +1,7 @@
 module Insightly
   module TaskLinkHelper
     def task_links
-      return [] if !@data["TASKLINKS"]
+      @data["TASKLINKS"] ||= []
          @data["TASKLINKS"].collect {|a| Insightly::TaskLink.build(a)}
      end
      def task_links=(list)

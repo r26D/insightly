@@ -1,7 +1,7 @@
 module Insightly
   module LinkHelper
     def links
-        return [] if !@data["LINKS"]
+      @data["LINKS"] ||= []
          @data["LINKS"].collect {|a| Insightly::Link.build(a)}
      end
      def links=(list)

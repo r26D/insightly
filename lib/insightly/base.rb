@@ -5,7 +5,7 @@
 #METODO all the helpers should auto filter out duplicates (links,contact info,address etc)
 #METODO only allow build to set fields that are part of the API fields
 #METODO Fix all tests so they don't require the existence of certain object ids
-
+#METODO add support for $top $skip and Brief=true for the things that suppor them
 #METODO make a distinction between fields that you can set and save and ones you can only read - like DATE_UPDATED_UTC
 module Insightly
   class Base

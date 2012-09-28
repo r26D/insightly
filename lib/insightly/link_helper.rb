@@ -19,7 +19,7 @@ module Insightly
       self.links.collect { |link| link.contact_id}.compact
     end
     def opportunity_ids
-      self.links.collect { |link| link.contact_id}.compact
+      self.links.collect { |link| link.opportunity_id}.compact
     end
     def organisation_ids
       self.links.collect { |link| link.organisation_id}.compact

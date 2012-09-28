@@ -203,6 +203,12 @@ describe Insightly::Organisation do
         @link = Insightly::Link.add_contact(2982194, "Janitor", "Recent Hire")
         # @link = Insightly::Link.add_opportunity(968613,"Janitor", "Recent Hire")
       end
+      it "should provide a list of contact_ids"
+      it "should provide a list of opportunity_ids"
+      it "should provide a list of organisation_ids"
+      it "should provide a list of contacts"
+      it "should provide a list of opportunities"
+      it "should provide a list of organisations"
       it "should let you set it to nil" do
          @org.links = nil
          @org.links.should == []

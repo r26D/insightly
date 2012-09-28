@@ -1,5 +1,3 @@
-#METODO be able to ask the object for a list of contact_ids,project_ids, opportunity_ids that are linked
-#METODO be able to ask the object for a list of objects for contact,project,opportunity  that are linked
 module Insightly
   class Organisation < ReadWrite
     include Insightly::AddressHelper

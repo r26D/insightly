@@ -37,7 +37,7 @@ http_interactions:
       Server: 
       - Microsoft-IIS/7.5
       Date: 
-      - Sun, 30 Sep 2012 02:33:46 GMT
+      - Sun, 30 Sep 2012 02:46:07 GMT
     body: 
       encoding: ASCII-8BIT
       string: !binary |
@@ -58,7 +58,7 @@ http_interactions:
         4a2I9HB7Zz/dfUB65dG9YXHrNfwl3/9/ACcryLnaBgAA
 
     http_version: 
-  recorded_at: Sun, 30 Sep 2012 02:34:07 GMT
+  recorded_at: Sun, 30 Sep 2012 02:46:28 GMT
 - request: 
     method: post
     uri: https://<API_KEY>:@api.insight.ly/v1/Tasks
@@ -92,19 +92,19 @@ http_interactions:
       Expires: 
       - "-1"
       Location: 
-      - https://api.insight.ly/v1/Tasks/3375387
+      - https://api.insight.ly/v1/Tasks/3375403
       Server: 
       - Microsoft-IIS/7.5
       Date: 
-      - Sun, 30 Sep 2012 02:33:47 GMT
+      - Sun, 30 Sep 2012 02:46:08 GMT
     body: 
       encoding: US-ASCII
-      string: "{\"TASK_ID\":3375387,\"TITLE\":\"000 Test Task\",\"CATEGORY_ID\":null,\"DUE_DATE\":null,\"COMPLETED_DATE_UTC\":\"2012-09-30 02:33:46\",\"PUBLICLY_VISIBLE\":false,\"COMPLETED\":true,\"PROJECT_ID\":null,\"DETAILS\":null,\"STATUS\":\"Completed\",\"PRIORITY\":null,\"PERCENT_COMPLETE\":100,\"START_DATE\":\"2012-09-30 00:00:00\",\"ASSIGNED_BY_USER_ID\":null,\"PARENT_TASK_ID\":null,\"RESPONSIBLE_USER_ID\":34976,\"OWNER_USER_ID\":34976,\"DATE_CREATED_UTC\":\"2012-09-30 02:33:46\",\"DATE_UPDATED_UTC\":\"2012-09-30 02:33:46\",\"TASKLINKS\":[]}"
+      string: "{\"TASK_ID\":3375403,\"TITLE\":\"000 Test Task\",\"CATEGORY_ID\":null,\"DUE_DATE\":null,\"COMPLETED_DATE_UTC\":\"2012-09-30 02:46:08\",\"PUBLICLY_VISIBLE\":false,\"COMPLETED\":true,\"PROJECT_ID\":null,\"DETAILS\":null,\"STATUS\":\"Completed\",\"PRIORITY\":null,\"PERCENT_COMPLETE\":100,\"START_DATE\":\"2012-09-30 00:00:00\",\"ASSIGNED_BY_USER_ID\":null,\"PARENT_TASK_ID\":null,\"RESPONSIBLE_USER_ID\":34976,\"OWNER_USER_ID\":34976,\"DATE_CREATED_UTC\":\"2012-09-30 02:46:08\",\"DATE_UPDATED_UTC\":\"2012-09-30 02:46:08\",\"TASKLINKS\":[]}"
     http_version: 
-  recorded_at: Sun, 30 Sep 2012 02:34:07 GMT
+  recorded_at: Sun, 30 Sep 2012 02:46:29 GMT
 - request: 
     method: post
-    uri: https://<API_KEY>:@api.insight.ly/v1/Tasks/3375387/comments
+    uri: https://<API_KEY>:@api.insight.ly/v1/Tasks/3375403/comments
     body: 
       encoding: ASCII-8BIT
       string: "{\"BODY\":\"Sample Comment\"}"
@@ -135,19 +135,19 @@ http_interactions:
       Expires: 
       - "-1"
       Location: 
-      - https://api.insight.ly/v1/Comments/808428
+      - https://api.insight.ly/v1/Comments/808431
       Server: 
       - Microsoft-IIS/7.5
       Date: 
-      - Sun, 30 Sep 2012 02:33:47 GMT
+      - Sun, 30 Sep 2012 02:46:09 GMT
     body: 
       encoding: US-ASCII
-      string: "{\"COMMENT_ID\":808428,\"BODY\":\"Sample Comment\",\"OWNER_USER_ID\":226277,\"DATE_CREATED_UTC\":\"2012-09-30 02:33:47\",\"DATE_UPDATED_UTC\":\"2012-09-30 02:33:47\",\"FILE_ATTACHMENTS\":null}"
+      string: "{\"COMMENT_ID\":808431,\"BODY\":\"Sample Comment\",\"OWNER_USER_ID\":226277,\"DATE_CREATED_UTC\":\"2012-09-30 02:46:09\",\"DATE_UPDATED_UTC\":\"2012-09-30 02:46:09\",\"FILE_ATTACHMENTS\":null}"
     http_version: 
-  recorded_at: Sun, 30 Sep 2012 02:34:08 GMT
+  recorded_at: Sun, 30 Sep 2012 02:46:30 GMT
 - request: 
     method: get
-    uri: https://<API_KEY>:@api.insight.ly/v1/Tasks/3375387/comments
+    uri: https://<API_KEY>:@api.insight.ly/v1/Tasks/3375403/comments
     body: 
       encoding: US-ASCII
       string: ""
@@ -182,22 +182,22 @@ http_interactions:
       Server: 
       - Microsoft-IIS/7.5
       Date: 
-      - Sun, 30 Sep 2012 02:33:48 GMT
+      - Sun, 30 Sep 2012 02:46:09 GMT
     body: 
       encoding: ASCII-8BIT
       string: !binary |
         H4sIAAAAAAAEAO29B2AcSZYlJi9tynt/SvVK1+B0oQiAYBMk2JBAEOzBiM3m
         kuwdaUcjKasqgcplVmVdZhZAzO2dvPfee++999577733ujudTif33/8/XGZk
-        AWz2zkrayZ4hgKrIHz9+fB8/Ir73iz86+fKLL05fvPn9z55+9Ohg52B/72D0
-        0ZMvn/4+Hz366HW2WJV5elItFvmy/Wj00ZfffXH66vf/6jX9g+Z7e5/uPXgw
-        +ujp8ZvT3//k1Sn9ePr7f/XmhF7d29nd2955uH1vJ93Ze3Tv3qP9B/Q+N/zq
-        JX5sbvjs7Pnp73/85s3xybeB3OuPHn3v+7/k+/8Pb4Mhxa4AAAA=
+        AWz2zkrayZ4hgKrIHz9+fB8/Ir73iz86+fKLL05fvPn9z55+9Ohg52D/3u7o
+        oydfPv19Pnr00etssSrz9KRaLPJl+9Hooy+/++L01e//1Wv6B8339j7de/Bg
+        9NHT4zenv//Jq1P68fT3/+rNCb26t7O7t73zcPveTrqz92j/00c7D+l9bvjV
+        S/zY3PDZ2fPT3//4zZvjk28DudcfPfre93/J9/8fXoYlHq4AAAA=
 
     http_version: 
-  recorded_at: Sun, 30 Sep 2012 02:34:09 GMT
+  recorded_at: Sun, 30 Sep 2012 02:46:30 GMT
 - request: 
     method: get
-    uri: https://<API_KEY>:@api.insight.ly/v1/Comments/808428
+    uri: https://<API_KEY>:@api.insight.ly/v1/Comments/808431
     body: 
       encoding: US-ASCII
       string: ""
@@ -228,12 +228,12 @@ http_interactions:
       Server: 
       - Microsoft-IIS/7.5
       Date: 
-      - Sun, 30 Sep 2012 02:33:48 GMT
+      - Sun, 30 Sep 2012 02:46:10 GMT
     body: 
       encoding: US-ASCII
-      string: <?xml version="1.0" encoding="utf-8"?><Comment xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><COMMENT_ID>808428</COMMENT_ID><BODY>Sample Comment</BODY><OWNER_USER_ID>226277</OWNER_USER_ID><DATE_CREATED_UTC>2012-09-30T02:33:47.897</DATE_CREATED_UTC><DATE_UPDATED_UTC>2012-09-30T02:33:47.897</DATE_UPDATED_UTC><FILE_ATTACHMENTS/></Comment>
+      string: <?xml version="1.0" encoding="utf-8"?><Comment xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><COMMENT_ID>808431</COMMENT_ID><BODY>Sample Comment</BODY><OWNER_USER_ID>226277</OWNER_USER_ID><DATE_CREATED_UTC>2012-09-30T02:46:09.54</DATE_CREATED_UTC><DATE_UPDATED_UTC>2012-09-30T02:46:09.54</DATE_UPDATED_UTC><FILE_ATTACHMENTS/></Comment>
     http_version: 
-  recorded_at: Sun, 30 Sep 2012 02:34:09 GMT
+  recorded_at: Sun, 30 Sep 2012 02:46:31 GMT
 - request: 
     method: put
     uri: https://<API_KEY>:@api.insight.ly/v1/Comments
@@ -242,11 +242,11 @@ http_interactions:
       string: |
         <?xml version="1.0" encoding="utf-8"?>
                 <Comment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-                <COMMENT_ID>808428</COMMENT_ID>
+                <COMMENT_ID>808431</COMMENT_ID>
                 <BODY>Test Comment Edit Now</BODY>
                 <OWNER_USER_ID>226277</OWNER_USER_ID>
-                <DATE_CREATED_UTC>2012-09-30T02:33:47.897</DATE_CREATED_UTC>
-                <DATE_UPDATED_UTC>2012-09-30T02:33:47.897</DATE_UPDATED_UTC>
+                <DATE_CREATED_UTC>2012-09-30T02:46:09.54</DATE_CREATED_UTC>
+                <DATE_UPDATED_UTC>2012-09-30T02:46:09.54</DATE_UPDATED_UTC>
                 <FILE_ATTACHMENTS></FILE_ATTACHMENTS>
                 </Comment>
 
@@ -258,7 +258,7 @@ http_interactions:
       Content-Type: 
       - application/xml
       Content-Length: 
-      - "488"
+      - "486"
       User-Agent: 
       - Ruby
   response: 
@@ -275,17 +275,17 @@ http_interactions:
       Server: 
       - Microsoft-IIS/7.5
       Date: 
-      - Sun, 30 Sep 2012 02:33:49 GMT
+      - Sun, 30 Sep 2012 02:46:11 GMT
       Content-Length: 
       - "0"
     body: 
       encoding: US-ASCII
       string: ""
     http_version: 
-  recorded_at: Sun, 30 Sep 2012 02:34:10 GMT
+  recorded_at: Sun, 30 Sep 2012 02:46:32 GMT
 - request: 
     method: get
-    uri: https://<API_KEY>:@api.insight.ly/v1/Comments/808428
+    uri: https://<API_KEY>:@api.insight.ly/v1/Comments/808431
     body: 
       encoding: US-ASCII
       string: ""
@@ -316,10 +316,10 @@ http_interactions:
       Server: 
       - Microsoft-IIS/7.5
       Date: 
-      - Sun, 30 Sep 2012 02:33:49 GMT
+      - Sun, 30 Sep 2012 02:46:11 GMT
     body: 
       encoding: US-ASCII
-      string: <?xml version="1.0" encoding="utf-8"?><Comment xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><COMMENT_ID>808428</COMMENT_ID><BODY>Test Comment Edit Now</BODY><OWNER_USER_ID>226277</OWNER_USER_ID><DATE_CREATED_UTC>2012-09-30T02:33:47.897</DATE_CREATED_UTC><DATE_UPDATED_UTC>2012-09-30T02:33:49.677</DATE_UPDATED_UTC><FILE_ATTACHMENTS/></Comment>
+      string: <?xml version="1.0" encoding="utf-8"?><Comment xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><COMMENT_ID>808431</COMMENT_ID><BODY>Test Comment Edit Now</BODY><OWNER_USER_ID>226277</OWNER_USER_ID><DATE_CREATED_UTC>2012-09-30T02:46:09.54</DATE_CREATED_UTC><DATE_UPDATED_UTC>2012-09-30T02:46:11.55</DATE_UPDATED_UTC><FILE_ATTACHMENTS/></Comment>
     http_version: 
-  recorded_at: Sun, 30 Sep 2012 02:34:10 GMT
+  recorded_at: Sun, 30 Sep 2012 02:46:32 GMT
 recorded_with: VCR 2.2.5

@@ -10,7 +10,7 @@
 #METODO Fix all tests so they don't require the existence of certain object ids
 #METODO add support for $top $skip and Brief=true for the things that suppor them
 #METODO make a distinction between fields that you can set and save and ones you can only read - like DATE_UPDATED_UTC
-#METODO Add a task that will remove all the vcr cassettes so we can confirm everything works
+
 module Insightly
   class Base
 

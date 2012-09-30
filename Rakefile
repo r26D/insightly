@@ -31,6 +31,11 @@ task :tag_version do
   system "git push origin --tags"
 end
 
+desc "Clean out VCR cache"
+task :clean_vcr do
+  puts "purging VCR cache"
+  rm_f Dir.glob("spec/unit/cassettes/*.yml")
+end
 desc 'Cleans generated files'
 task :clean do
   rm_f Dir.glob('*.gem').join(" ")

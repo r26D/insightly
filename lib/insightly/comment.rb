@@ -1,7 +1,8 @@
 #METODO Add support for FileAttachment xml
+#METODO the load via xml and load via json do not return the same format data
 module Insightly
   class Comment < ReadWrite
-    URL_BASE = "Comments"
+    self.url_base = "Comments"
 
     api_field "COMMENT_ID",
               "BODY",
@@ -41,7 +42,6 @@ module Insightly
 
     def load(id)
       load_from_xml(get_collection("#{url_base}/#{id}", :xml_raw))
-
     end
 
     def save

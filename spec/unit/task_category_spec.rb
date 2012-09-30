@@ -1,11 +1,12 @@
 require File.expand_path(File.dirname(__FILE__) + "/../spec_helper")
 
+
 describe Insightly::TaskCategory do
   before(:each) do
     Insightly::Configuration.api_key = INSIGHTLY_API_KEY
     Insightly::Configuration.logger = Insightly::Configuration._debug_logger
 
-    @all = Insightly::TaskCategory.all
+   # @all = Insightly::TaskCategory.all
 
     @task_category = Insightly::TaskCategory.build({ "CATEGORY_ID" => 1,
                                                                    "ACTIVE" => true,

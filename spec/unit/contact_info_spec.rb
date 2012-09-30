@@ -1,4 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + "/../spec_helper")
+#METODO Convert to VCR
 
 describe Insightly::ContactInfo do
   before(:each) do

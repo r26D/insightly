@@ -1,3 +1,4 @@
+#METODO need to be able to delete records
 #METODO create a script that can talk to the remote insightly install and confirm that everything still workd
 #METODO re-write all the tests so that they store local data to work against
 #METODO contacts allow you to set special dates to remember - can we access that via api?
@@ -9,6 +10,7 @@
 #METODO Fix all tests so they don't require the existence of certain object ids
 #METODO add support for $top $skip and Brief=true for the things that suppor them
 #METODO make a distinction between fields that you can set and save and ones you can only read - like DATE_UPDATED_UTC
+#METODO Add a task that will remove all the vcr cassettes so we can confirm everything works
 module Insightly
   class Base
 

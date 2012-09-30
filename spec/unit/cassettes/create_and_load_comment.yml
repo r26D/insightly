@@ -1,0 +1,237 @@
+--- 
+http_interactions: 
+- request: 
+    method: get
+    uri: https://<API_KEY>:@api.insight.ly/v1/Users
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Accept: 
+      - application/json
+      Accept-Encoding: 
+      - gzip, deflate
+      Content-Type: 
+      - application/json
+      User-Agent: 
+      - Ruby
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Cache-Control: 
+      - no-cache
+      Pragma: 
+      - no-cache
+      Transfer-Encoding: 
+      - chunked
+      Content-Type: 
+      - application/json; charset=utf-8
+      Content-Encoding: 
+      - gzip
+      Expires: 
+      - "-1"
+      Vary: 
+      - Accept-Encoding
+      Server: 
+      - Microsoft-IIS/7.5
+      Date: 
+      - Sun, 30 Sep 2012 02:33:50 GMT
+    body: 
+      encoding: ASCII-8BIT
+      string: !binary |
+        H4sIAAAAAAAEAO29B2AcSZYlJi9tynt/SvVK1+B0oQiAYBMk2JBAEOzBiM3m
+        kuwdaUcjKasqgcplVmVdZhZAzO2dvPfee++999577733ujudTif33/8/XGZk
+        AWz2zkrayZ4hgKrIHz9+fB8/Ir73iz/66vXpq9//7OlHj+7tP3zw6eijky9f
+        vDk+ecMf7T18cP/Tg3ujj56dvXr95vd/cfzF6UePPnpVLT8affT82H1yki1W
+        k7ws6eM3Z1+c/tSXL075/Y9O8mVbZ2X6us2Ws6yepW+KRU6tTr84Pnv++x8/
+        ffrq9PVraldXy9+z3vt0Np5WC/r6+OkXZy/OXr95dfzmy1cfPWrrdU4fnpx8
+        +dWLN7//l999cUofnmdlw5++OftJwkHaPD1+c/r7n7w6pR9Pf/+v3pwQ6L2d
+        3Z3t3b3tvQfpzv6jvb1HOzvUAzf86iV+bGr4S0YdAh1ECPRwp0OgeV6uqA+f
+        Qtl0Wq2XLX369QgEkBsoZImxiUT6J8a8kUb7PHRtuIlG0jCk0f2dTx90aXSw
+        t/twv0Oj47LMb81Gp1nT5vXyRiplALqBTMIkm6kkbTDoYSLtfvpol8euDQeJ
+        ZBsGRNrb/fTgARHEp9LuwcHB/YP9vS6ZFtkPeuL2+h59EFLotnyUMbzmnhIp
+        RiRLj01U0j8x7D6Z9rZ3Hmzv0uj3Hu3vP9rZoz64YY9MvYZ9Mt2Pkek+iWFA
+        pjfVbEa9+EQ6bZr8HX0W0um2nNQSwA+l0SZO8kf+6aP7D6gLbriRRNwwJNHe
+        p3sPuvJGL+3vPXjYIdHTon5LvQQkKhf5clbV5/R5SKbbstOMgG4gk1CgQyXz
+        4a2I9HB7Zz/dfUB65dG9YXHrNfwl3/9/ACcryLnaBgAA
+
+    http_version: 
+  recorded_at: Sun, 30 Sep 2012 02:34:11 GMT
+- request: 
+    method: post
+    uri: https://<API_KEY>:@api.insight.ly/v1/Tasks
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"TITLE\":\"000 Test Task\",\"STATUS\":\"Completed\",\"OWNER_USER_ID\":34976,\"RESPONSIBLE_USER_ID\":34976}"
+    headers: 
+      Accept: 
+      - application/json
+      Accept-Encoding: 
+      - gzip, deflate
+      Content-Type: 
+      - application/json
+      Content-Length: 
+      - "96"
+      User-Agent: 
+      - Ruby
+  response: 
+    status: 
+      code: 201
+      message: Created
+    headers: 
+      Cache-Control: 
+      - no-cache
+      Pragma: 
+      - no-cache
+      Transfer-Encoding: 
+      - chunked
+      Content-Type: 
+      - application/json; charset=utf-8
+      Expires: 
+      - "-1"
+      Location: 
+      - https://api.insight.ly/v1/Tasks/3375388
+      Server: 
+      - Microsoft-IIS/7.5
+      Date: 
+      - Sun, 30 Sep 2012 02:33:50 GMT
+    body: 
+      encoding: US-ASCII
+      string: "{\"TASK_ID\":3375388,\"TITLE\":\"000 Test Task\",\"CATEGORY_ID\":null,\"DUE_DATE\":null,\"COMPLETED_DATE_UTC\":\"2012-09-30 02:33:51\",\"PUBLICLY_VISIBLE\":false,\"COMPLETED\":true,\"PROJECT_ID\":null,\"DETAILS\":null,\"STATUS\":\"Completed\",\"PRIORITY\":null,\"PERCENT_COMPLETE\":100,\"START_DATE\":\"2012-09-30 00:00:00\",\"ASSIGNED_BY_USER_ID\":null,\"PARENT_TASK_ID\":null,\"RESPONSIBLE_USER_ID\":34976,\"OWNER_USER_ID\":34976,\"DATE_CREATED_UTC\":\"2012-09-30 02:33:51\",\"DATE_UPDATED_UTC\":\"2012-09-30 02:33:51\",\"TASKLINKS\":[]}"
+    http_version: 
+  recorded_at: Sun, 30 Sep 2012 02:34:12 GMT
+- request: 
+    method: post
+    uri: https://<API_KEY>:@api.insight.ly/v1/Tasks/3375388/comments
+    body: 
+      encoding: ASCII-8BIT
+      string: "{\"BODY\":\"Sample Comment\"}"
+    headers: 
+      Accept: 
+      - application/json
+      Accept-Encoding: 
+      - gzip, deflate
+      Content-Type: 
+      - application/json
+      Content-Length: 
+      - "25"
+      User-Agent: 
+      - Ruby
+  response: 
+    status: 
+      code: 201
+      message: Created
+    headers: 
+      Cache-Control: 
+      - no-cache
+      Pragma: 
+      - no-cache
+      Transfer-Encoding: 
+      - chunked
+      Content-Type: 
+      - application/json; charset=utf-8
+      Expires: 
+      - "-1"
+      Location: 
+      - https://api.insight.ly/v1/Comments/808429
+      Server: 
+      - Microsoft-IIS/7.5
+      Date: 
+      - Sun, 30 Sep 2012 02:33:52 GMT
+    body: 
+      encoding: US-ASCII
+      string: "{\"COMMENT_ID\":808429,\"BODY\":\"Sample Comment\",\"OWNER_USER_ID\":226277,\"DATE_CREATED_UTC\":\"2012-09-30 02:33:52\",\"DATE_UPDATED_UTC\":\"2012-09-30 02:33:52\",\"FILE_ATTACHMENTS\":null}"
+    http_version: 
+  recorded_at: Sun, 30 Sep 2012 02:34:12 GMT
+- request: 
+    method: get
+    uri: https://<API_KEY>:@api.insight.ly/v1/Tasks/3375388/comments
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Accept: 
+      - application/json
+      Accept-Encoding: 
+      - gzip, deflate
+      Content-Type: 
+      - application/json
+      User-Agent: 
+      - Ruby
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Cache-Control: 
+      - no-cache
+      Pragma: 
+      - no-cache
+      Transfer-Encoding: 
+      - chunked
+      Content-Type: 
+      - application/json; charset=utf-8
+      Content-Encoding: 
+      - gzip
+      Expires: 
+      - "-1"
+      Vary: 
+      - Accept-Encoding
+      Server: 
+      - Microsoft-IIS/7.5
+      Date: 
+      - Sun, 30 Sep 2012 02:33:52 GMT
+    body: 
+      encoding: ASCII-8BIT
+      string: !binary |
+        H4sIAAAAAAAEAO29B2AcSZYlJi9tynt/SvVK1+B0oQiAYBMk2JBAEOzBiM3m
+        kuwdaUcjKasqgcplVmVdZhZAzO2dvPfee++999577733ujudTif33/8/XGZk
+        AWz2zkrayZ4hgKrIHz9+fB8/Ir73iz86+fKLL05fvPn9z55+9Ohg52B/7+Ho
+        oydfPv19Pnr00etssSrz9KRaLPJl+9Hooy+/++L01e//1Wv6B8339j7de/Bg
+        9NHT4zenv//Jq1P68fT3/+rNCb26t7O7t73zcPveTrqz9+jevUf39+h9bvjV
+        S/zY3PDZ2fPT3//4zZvjk28DudcfPfre93/J9/8fOmar3a4AAAA=
+
+    http_version: 
+  recorded_at: Sun, 30 Sep 2012 02:34:13 GMT
+- request: 
+    method: get
+    uri: https://<API_KEY>:@api.insight.ly/v1/Comments/808429
+    body: 
+      encoding: US-ASCII
+      string: ""
+    headers: 
+      Accept: 
+      - application/xml
+      Accept-Encoding: 
+      - gzip, deflate
+      Content-Type: 
+      - application/xml
+      User-Agent: 
+      - Ruby
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Cache-Control: 
+      - no-cache
+      Pragma: 
+      - no-cache
+      Transfer-Encoding: 
+      - chunked
+      Content-Type: 
+      - application/xml; charset=utf-8
+      Expires: 
+      - "-1"
+      Server: 
+      - Microsoft-IIS/7.5
+      Date: 
+      - Sun, 30 Sep 2012 02:33:53 GMT
+    body: 
+      encoding: US-ASCII
+      string: <?xml version="1.0" encoding="utf-8"?><Comment xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><COMMENT_ID>808429</COMMENT_ID><BODY>Sample Comment</BODY><OWNER_USER_ID>226277</OWNER_USER_ID><DATE_CREATED_UTC>2012-09-30T02:33:52.127</DATE_CREATED_UTC><DATE_UPDATED_UTC>2012-09-30T02:33:52.127</DATE_UPDATED_UTC><FILE_ATTACHMENTS/></Comment>
+    http_version: 
+  recorded_at: Sun, 30 Sep 2012 02:34:13 GMT
+recorded_with: VCR 2.2.5

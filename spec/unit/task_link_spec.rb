@@ -1,5 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + "/../spec_helper")
 
+
 describe Insightly::TaskLink do
   before(:each) do
     Insightly::Configuration.api_key = INSIGHTLY_API_KEY

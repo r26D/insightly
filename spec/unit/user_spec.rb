@@ -1,6 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + "/../spec_helper")
 
-describe Insightly::OpportunityStateReason do
+
+describe Insightly::User do
   before(:each) do
     Insightly::Configuration.api_key = INSIGHTLY_API_KEY
     Insightly::Configuration.logger = Insightly::Configuration._debug_logger

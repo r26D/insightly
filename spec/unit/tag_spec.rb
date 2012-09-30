@@ -30,19 +30,19 @@ describe Insightly::Tag do
   end
   it "should allow you to see tags by organisations" do
     Insightly::Tag.any_instance.stub(:get_collection).with("#{@tag.url_base}/Organisations").and_return([@tag.remote_data])
-    Insightly::Tag.contact_tags.should == [@tag]
+    Insightly::Tag.organisation_tags.should == [@tag]
   end
   it "should allow you to see tags by opportunites" do
     Insightly::Tag.any_instance.stub(:get_collection).with("#{@tag.url_base}/Opportunities").and_return([@tag.remote_data])
-    Insightly::Tag.contact_tags.should == [@tag]
+    Insightly::Tag.opportunity_tags.should == [@tag]
   end
   it "should allow you to see tags by projects" do
     Insightly::Tag.any_instance.stub(:get_collection).with("#{@tag.url_base}/Projects").and_return([@tag.remote_data])
-    Insightly::Tag.contact_tags.should == [@tag]
+    Insightly::Tag.project_tags.should == [@tag]
   end
   it "should allow you to see tags by emails" do
     Insightly::Tag.any_instance.stub(:get_collection).with("#{@tag.url_base}/Emails").and_return([@tag.remote_data])
-    Insightly::Tag.contact_tags.should == [@tag]
+    Insightly::Tag.email_tags.should == [@tag]
   end
   it "should allow you to build a tag from a string" do
     @tag = Insightly::Tag.build("Happy")

@@ -1,5 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + "/../spec_helper")
 
+
 describe Insightly::OpportunityStateReason do
   before(:each) do
     Insightly::Configuration.api_key = INSIGHTLY_API_KEY
@@ -29,7 +30,7 @@ describe Insightly::OpportunityStateReason do
     Insightly::OpportunityStateReason.new.url_base.should == "OpportunityStateReasons"
   end
   it "should know the opportunity state" do
-    @open_state.state.should == "Open"
+    @open_state.for_opportunity_state.should == "Open"
   end
   context "remote query" do
     before(:each) do

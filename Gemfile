@@ -5,3 +5,5 @@ gemspec
 gem 'rspec'
 gem 'rake'
 gem 'gemcutter'
+gem 'vcr'
+gem 'webmock'

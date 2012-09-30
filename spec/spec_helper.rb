@@ -7,12 +7,30 @@
 require "rubygems"
 ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../Gemfile', __FILE__)
 
+
+
 require 'bundler/setup'  if File.exists?(ENV['BUNDLE_GEMFILE'])
 Bundler.require(:default, :testing) if defined?(Bundler)
+
+
+require 'vcr'
+
+VCR.configure do |c|
+  c.cassette_library_dir = 'cassettes'
+  c.hook_into :webmock
+  c.default_cassette_options = {:record => :new_episodes} # :new_episodes, :none, :all
+  c.ignore_localhost = true
+ # c.allow_http_connections_when_no_cassette = true
+  c.filter_sensitive_data('<API_KEY>') { INSIGHTLY_API_KEY }
+end
+
+
 
 require "insightly"
 require File.expand_path(File.dirname(__FILE__) + "/../api_key")
 RSpec.configure do |config|
+  config.extend VCR::RSpec::Macros
+
   config.treat_symbols_as_metadata_keys_with_true_values = true
   config.run_all_when_everything_filtered = true
   config.filter_run :focus

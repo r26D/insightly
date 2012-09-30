@@ -39,9 +39,25 @@ describe Insightly::Comment do
     @comment.remote_id.should == @comment.comment_id
   end
   it "should allow you to load based on an id" do
-    #METODO This should create the comment so we can make sure it exists - once that feature is available
-    @comment = Insightly::Comment.new(768880)
-    @comment.comment_id.should == 768880
+    VCR.use_cassette('create and load comment') do
+      @user = Insightly::User.all.first
+
+      @task = Insightly::Task.new
+      @task.title = "000 Test Task"
+      @task.status = "Completed"
+      @task.owner_user_id = @user.user_id
+      @task.responsible_user_id = @user.user_id
+      @task.save
+      @task.comment_on("Sample Comment")
+      @saved_comment = @task.comments.first
+
+
+      @comment = Insightly::Comment.new(@saved_comment.comment_id)
+      @comment.comment_id.should == @saved_comment.comment_id
+      @comment.body.should == @saved_comment.body
+
+
+    end
   end
   it "should allow you to build an object from a hash" do
     comment = Insightly::Comment.new.build({"BODY" => "Other"})
@@ -77,15 +93,31 @@ describe Insightly::Comment do
   end
 
   it "should allow you to modify a comment" do
-    @comment = Insightly::Comment.new(769043)
-    before_body = @comment.body
-    value = "Test Comment Edit #{Time.now}"
-    @comment.body = value
-    @comment.save
-    @comment.body.should == value
+    VCR.use_cassette('create and modify comment') do
+      @user = Insightly::User.all.first
 
-    @comment.reload
-    @comment.body.should == value
+      @task = Insightly::Task.new
+      @task.title = "000 Test Task"
+      @task.status = "Completed"
+      @task.owner_user_id = @user.user_id
+      @task.responsible_user_id = @user.user_id
+      @task.save
+      @task.comment_on("Sample Comment")
+      @saved_comment = @task.comments.first
+
+      @comment = Insightly::Comment.new(@saved_comment.comment_id)
+      @comment.body.should == "Sample Comment"
+
+      value = "Test Comment Edit Now"
+      @comment.body = value
+      @comment.save
+      @comment.body.should == value
+      @comment.reload
+      @comment.body.should == value
+
+    end
+
+
   end
 
 

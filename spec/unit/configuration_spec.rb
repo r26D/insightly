@@ -1,5 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + "/../spec_helper")
 
+
 describe Insightly::Configuration do
   #customer_user_agent
   #endpoint
@@ -13,12 +14,12 @@ describe Insightly::Configuration do
   it "should provide a default user agent" do
 
     Insightly::Configuration.instantiate.custom_user_agent.should be_nil
-    Insightly::Configuration.instantiate.user_agent.should == "Insightly Ruby Gem 0.1.0"
+    Insightly::Configuration.instantiate.user_agent.should == "Insightly Ruby Gem #{Insightly::Version::String}"
   end
   it "should allow you to override the user agent" do
 
     Insightly::Configuration.custom_user_agent = "Bob"
-    Insightly::Configuration.instantiate.user_agent.should == "Insightly Ruby Gem 0.1.0 (Bob)"
+    Insightly::Configuration.instantiate.user_agent.should == "Insightly Ruby Gem #{Insightly::Version::String} (Bob)"
   end
   it "should provide a default endpoint" do
     Insightly::Configuration.instantiate.endpoint.should == "https://api.insight.ly/v1"

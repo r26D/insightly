@@ -42,6 +42,19 @@ describe Insightly::Task do
 
 
     end
+    it "should provide today's date if none if provided" do
+      date = Date.today
+            Insightly::Task.date_to_insightly.should == date.strftime("%Y-%m-%d 00:00:00")
+    end
+    it "should be able to convert a date to the insightly format" do
+      date = Date.today
+      Insightly::Task.date_to_insightly(date).should == date.strftime("%Y-%m-%d 00:00:00")
+    end
+    it "should be able to convert a Date Time to the insightly format" do
+      time = Time.now
+      Insightly::Task.date_to_insightly(time).should == time.strftime("%Y-%m-%d %H:%M:%S")
+    end
+
     context "remote id" do
        it "should know if the remote id is set" do
          @task.remote_id = nil

@@ -1,0 +1,321 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://<API_KEY>:@api.insight.ly/v1/Contacts
+    body:
+      encoding: ASCII-8BIT
+      string: ! '{"VISIBLE_TO":"OWNER","LAST_NAME":"Other","FIRST_NAME":"000 Test
+        Contact 2012-09-30"}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '85'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json; charset=utf-8
+      Expires:
+      - '-1'
+      Location:
+      - https://api.insight.ly/v1/Contacts/20923967
+      Server:
+      - Microsoft-IIS/7.5
+      Date:
+      - Sun, 30 Sep 2012 15:34:29 GMT
+    body:
+      encoding: US-ASCII
+      string: ! '{"CONTACT_ID":20923967,"SALUTATION":null,"FIRST_NAME":"000 Test Contact
+        2012-09-30","LAST_NAME":"Other","BACKGROUND":null,"IMAGE_URL":"http://s3.amazonaws.com/insightly.userfiles/20562/","DEFAULT_LINKED_ORGANISATION":null,"CONTACT_FIELD_1":null,"CONTACT_FIELD_2":null,"CONTACT_FIELD_3":null,"CONTACT_FIELD_4":null,"CONTACT_FIELD_5":null,"CONTACT_FIELD_6":null,"CONTACT_FIELD_7":null,"CONTACT_FIELD_8":null,"CONTACT_FIELD_9":null,"CONTACT_FIELD_10":null,"DATE_CREATED_UTC":"2012-09-30
+        15:34:29","DATE_UPDATED_UTC":"2012-09-30 15:34:29","ADDRESSES":[],"CONTACTINFOS":[],"DATES":[],"TAGS":[],"LINKS":[],"CONTACTLINKS":[],"EMAILLINKS":null,"VISIBLE_TO":"OWNER","VISIBLE_TEAM_ID":null,"VISIBLE_USER_IDS":null}'
+    http_version: !!null 
+  recorded_at: Sun, 30 Sep 2012 15:34:30 GMT
+- request:
+    method: post
+    uri: https://<API_KEY>:@api.insight.ly/v1/Tasks
+    body:
+      encoding: ASCII-8BIT
+      string: ! '{"STATUS":"Completed","RESPONSIBLE_USER_ID":34976,"OWNER_USER_ID":34976,"TITLE":"000
+        Test Task 2012-09-30"}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '107'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json; charset=utf-8
+      Expires:
+      - '-1'
+      Location:
+      - https://api.insight.ly/v1/Tasks/3376105
+      Server:
+      - Microsoft-IIS/7.5
+      Date:
+      - Sun, 30 Sep 2012 15:34:29 GMT
+    body:
+      encoding: US-ASCII
+      string: ! '{"TASK_ID":3376105,"TITLE":"000 Test Task 2012-09-30","CATEGORY_ID":null,"DUE_DATE":null,"COMPLETED_DATE_UTC":"2012-09-30
+        15:34:30","PUBLICLY_VISIBLE":false,"COMPLETED":true,"PROJECT_ID":null,"DETAILS":null,"STATUS":"Completed","PRIORITY":null,"PERCENT_COMPLETE":100,"START_DATE":"2012-09-30
+        00:00:00","ASSIGNED_BY_USER_ID":null,"PARENT_TASK_ID":null,"RESPONSIBLE_USER_ID":34976,"OWNER_USER_ID":34976,"DATE_CREATED_UTC":"2012-09-30
+        15:34:30","DATE_UPDATED_UTC":"2012-09-30 15:34:30","TASKLINKS":[]}'
+    http_version: !!null 
+  recorded_at: Sun, 30 Sep 2012 15:34:31 GMT
+- request:
+    method: put
+    uri: https://<API_KEY>:@api.insight.ly/v1/Tasks/3376105
+    body:
+      encoding: ASCII-8BIT
+      string: ! '{"TASK_ID":3376105,"TITLE":"000 Test Task 2012-09-30","CATEGORY_ID":null,"DUE_DATE":null,"COMPLETED_DATE_UTC":"2012-09-30
+        15:34:30","PUBLICLY_VISIBLE":false,"COMPLETED":true,"PROJECT_ID":null,"DETAILS":null,"STATUS":"Completed","PRIORITY":null,"PERCENT_COMPLETE":100,"START_DATE":"2012-09-30
+        00:00:00","ASSIGNED_BY_USER_ID":null,"PARENT_TASK_ID":null,"RESPONSIBLE_USER_ID":34976,"OWNER_USER_ID":34976,"DATE_CREATED_UTC":"2012-09-30
+        15:34:30","DATE_UPDATED_UTC":"2012-09-30 15:34:30","TASKLINKS":[{"CONTACT_ID":20923967,"TASK_ID":3376105}]}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '539'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Encoding:
+      - gzip
+      Expires:
+      - '-1'
+      Location:
+      - https://api.insight.ly/v1/Tasks/3376105
+      Vary:
+      - Accept-Encoding
+      Server:
+      - Microsoft-IIS/7.5
+      Date:
+      - Sun, 30 Sep 2012 15:34:31 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAEAO29B2AcSZYlJi9tynt/SvVK1+B0oQiAYBMk2JBAEOzBiM3m
+        kuwdaUcjKasqgcplVmVdZhZAzO2dvPfee++999577733ujudTif33/8/XGZk
+        AWz2zkrayZ4hgKrIHz9+fB8/In7xR2+OX/9ev//Z048e3bv34NPdnfujj96c
+        vXl++tGjj3Z2dtI3edOmb7Lmbbq3s7u3vfNw+97OR6OPTo7fnH7+5avfh19c
+        rsty9NHTr05//6f0sfn75MsvXj4/fXP6lD/9/b96c0IgHZB09/6je/uP7u0S
+        tJdfPXl+dvL89/n9f/Ls9dkT9H2elU3uwfjoUVuv6YOXr778zunJG7/b0zfH
+        Z89fmz9fvzl+8xX99dFJtViVeZvPAP/V2Zevzt78PqbRy9NXJ6cv3vz+BvxH
+        j3Z3dvjdV28YW3rfw3Rn5xH/jyAdv3599vkLGtOT3+f3/+r16SsPkZfHrwDT
+        klM+fXX6+uWXL3hU7oV7+w8ffDr66MvvvqAPup+i/9//5NUp/Xi6kWrc8KuX
+        +LG5IVB6fvbi9yKyfE/nG39yp3sHB3sP9+5JI/7EssHJly/eHCut93ao0cNP
+        HxDSrz4/fnH2+vjN2Zcv+CsZ55cvX3756s1XL4jK3qfd6fol3/8l/w8MZZ/+
+        cQIAAA==
+    http_version: !!null 
+  recorded_at: Sun, 30 Sep 2012 15:34:32 GMT
+- request:
+    method: get
+    uri: https://<API_KEY>:@api.insight.ly/v1/Tasks/3376105
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Encoding:
+      - gzip
+      Expires:
+      - '-1'
+      Vary:
+      - Accept-Encoding
+      Server:
+      - Microsoft-IIS/7.5
+      Date:
+      - Sun, 30 Sep 2012 15:34:31 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAEAO29B2AcSZYlJi9tynt/SvVK1+B0oQiAYBMk2JBAEOzBiM3m
+        kuwdaUcjKasqgcplVmVdZhZAzO2dvPfee++999577733ujudTif33/8/XGZk
+        AWz2zkrayZ4hgKrIHz9+fB8/In7xR2+OX/9ev//Z048e3bv34NPdnfujj96c
+        vXl++tGjj3Z2dtI3edOmb7Lmbbq3s7u3vfNw+97OR6OPTo7fnH7+5avfh19c
+        rsty9NHTr05//6f0sfn75MsvXj4/fXP6lD/9/b96c0IgHZB09/6je/uP7u0S
+        tJdfPXl+dvL89/n9f/Ls9dkT9H2elU3uwfjoUVuv6YOXr778zunJG7/b0zfH
+        Z89fmz9fvzl+8xX99dFJtViVeZvPAP/V2Zevzt78PqbRy9NXJ6cv3vz+BvxH
+        j3Z3dvjdV28YW3rfw3Rn5xH/jyAdv3599vkLGtOT3+f3/+r16SsPkZfHrwDT
+        klM+fXX6+uWXL3hU7oV7+w8ffDr66MvvvqAPup+i/9//5NUp/Xi6kWrc8KuX
+        +LG5IVB6fvbi9yKyfE/nG39yp3sHB3sP9+5JI/7EssHJly/eHCut93ao0cNP
+        HxDSrz4/fnH2+vjN2Zcv+CsZ55cvX3756s1XL4jK3qfd6fol3/8l/w8MZZ/+
+        cQIAAA==
+    http_version: !!null 
+  recorded_at: Sun, 30 Sep 2012 15:34:33 GMT
+- request:
+    method: get
+    uri: https://<API_KEY>:@api.insight.ly/v1/Contacts/20923967
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Encoding:
+      - gzip
+      Expires:
+      - '-1'
+      Vary:
+      - Accept-Encoding
+      Server:
+      - Microsoft-IIS/7.5
+      Date:
+      - Sun, 30 Sep 2012 15:34:32 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAEAO29B2AcSZYlJi9tynt/SvVK1+B0oQiAYBMk2JBAEOzBiM3m
+        kuwdaUcjKasqgcplVmVdZhZAzO2dvPfee++999577733ujudTif33/8/XGZk
+        AWz2zkrayZ4hgKrIHz9+fB8/In7xRydfvnhzfPLm9z97+tGjvZ2He/cefvpg
+        9NHr4+dfvTl+c/bli48eLddlOfro2dmr129+/xfHX5x+9OijnZ2d9E3etOlJ
+        tWyzaZvu7ezube883L6389Hoo+fHruWX7Tyv6bMnxye/1+evvvzqBXUjAM++
+        OP789Pf/6tVzajVv29Wju3ebe+Nskf2gWmZXzXhaLe4Wy6a4mLfl9Xjd5PV5
+        UebN3b2d+5/u3SWQT0+fHX/1/M3v//zsxe91+vT3//LV58cvzl4HSJvBPTs7
+        ff7099+Nf7wX//he/OP9+Mf34x9/Gv/4Qfzjg/jHD+Mf7+6Yz58evzn9/U9e
+        ndKPp7//V29OiKJuQtLd+4/u7T/aewiSUYvf/6uX+LG54fHTp69OX78+ff3R
+        o+9933Z89uLZl/oJQOivb44/198wE/qrvuF9cvrF8dlz7++fPHt99uT56e//
+        5kvC4svvvjh9Rf3aD0+Pv2CWlAGaj796ffqKPiYI+PyX/D+jQm5GvgIAAA==
+    http_version: !!null 
+  recorded_at: Sun, 30 Sep 2012 15:34:34 GMT
+- request:
+    method: get
+    uri: https://<API_KEY>:@api.insight.ly/v1/Contacts/20923967
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Encoding:
+      - gzip
+      Expires:
+      - '-1'
+      Vary:
+      - Accept-Encoding
+      Server:
+      - Microsoft-IIS/7.5
+      Date:
+      - Sun, 30 Sep 2012 15:34:32 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAEAO29B2AcSZYlJi9tynt/SvVK1+B0oQiAYBMk2JBAEOzBiM3m
+        kuwdaUcjKasqgcplVmVdZhZAzO2dvPfee++999577733ujudTif33/8/XGZk
+        AWz2zkrayZ4hgKrIHz9+fB8/In7xRydfvnhzfPLm9z97+tGjvZ2He/cefvpg
+        9NHr4+dfvTl+c/bli48eLddlOfro2dmr129+/xfHX5x+9OijnZ2d9E3etOlJ
+        tWyzaZvu7ezube883L6389Hoo+fHruWX7Tyv6bMnxye/1+evvvzqBXUjAM++
+        OP789Pf/6tVzajVv29Wju3ebe+Nskf2gWmZXzXhaLe4Wy6a4mLfl9Xjd5PV5
+        UebN3b2d+5/u3SWQT0+fHX/1/M3v//zsxe91+vT3//LV58cvzl4HSJvBPTs7
+        ff7099+Nf7wX//he/OP9+Mf34x9/Gv/4Qfzjg/jHD+Mf7+6Yz58evzn9/U9e
+        ndKPp7//V29OiKJuQtLd+4/u7T/aewiSUYvf/6uX+LG54fHTp69OX78+ff3R
+        o+9933Z89uLZl/oJQOivb44/198wE/qrvuF9cvrF8dlz7++fPHt99uT56e//
+        5kvC4svvvjh9Rf3aD0+Pv2CWlAGaj796ffqKPiYI+PyX/D+jQm5GvgIAAA==
+    http_version: !!null 
+  recorded_at: Sun, 30 Sep 2012 15:34:34 GMT
+recorded_with: VCR 2.2.5

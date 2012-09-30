@@ -2,7 +2,6 @@
 #METODO create a script that can talk to the remote insightly install and confirm that everything still workd
 #METODO re-write all the tests so that they store local data to work against
 #METODO contacts allow you to set special dates to remember - can we access that via api?
-#METODO It should have a method for converting date/time to the Insightly format
 #METODO custom fields expect text,drop down, or date - add better handling (text should cast to_s)
 #METODO contact infos should auto filter out duplicate entries
 #METODO all the helpers should auto filter out duplicates (links,contact info,address etc)
@@ -50,6 +49,9 @@ module Insightly
       end
     end
 
+    def self.date_to_insightly(date = Date.today)
+      date.strftime("%Y-%m-%d %H:%M:%S")
+    end
     def initialize(id = nil)
       @data = {}
       load(id) if id

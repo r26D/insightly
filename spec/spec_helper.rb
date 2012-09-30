@@ -20,7 +20,7 @@ VCR.configure do |c|
   c.hook_into :webmock
   c.default_cassette_options = {:record => :new_episodes} # :new_episodes, :none, :all
   c.ignore_localhost = true
-  #c.allow_http_connections_when_no_cassette = true
+ # c.allow_http_connections_when_no_cassette = true
   c.filter_sensitive_data('<API_KEY>') { INSIGHTLY_API_KEY }
 end
 
@@ -40,4 +40,40 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = 'random'
+end
+
+def simple_insightly_user
+
+  VCR.use_cassette('all insightly users', :allow_playback_repeats => true) do
+      return Insightly::User.all.first
+  end
+
+end
+
+def simple_insightly_task(title = nil)
+  VCR.use_cassette('simple task', :allow_playback_repeats => true) do
+        task = Insightly::Task.new.build({"STATUS" => "Completed",
+                                           "RESPONSIBLE_USER_ID" => simple_insightly_user.user_id,
+                                           "OWNER_USER_ID" => simple_insightly_user.user_id,
+                                           "TITLE" => title ? title : "000 Test Task #{Date.today}"
+                                          })
+        task.save
+    return task
+  end
+
+end
+def simple_insightly_organisation(title = nil)
+  VCR.use_cassette('simple contact') do
+
+  end
+end
+def simple_insightly_opportunity(title = nil)
+  VCR.use_cassette('simple contact') do
+
+  end
+end
+def simple_insightly_contact(first_name = nil, last_name = nil)
+  VCR.use_cassette('simple contact') do
+
+  end
 end

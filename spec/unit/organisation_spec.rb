@@ -28,9 +28,31 @@ describe Insightly::Organisation do
         }
 
     )
-    #  @task_links = Insightly::TaskLink.all
-    #  d = 1
+
   end
+  context "remote id" do
+      it "should know if the remote id is set" do
+        @organisation.remote_id = nil
+        @organisation.remote_id?.should be_false
+        @organisation.remote_id = ""
+        @organisation.remote_id?.should be_false
+        @organisation.remote_id = 1
+        @organisation.remote_id?.should be_true
+        @organisation.remote_id = "1"
+        @organisation.remote_id?.should be_true
+      end
+      it "should know that the remote id and the organisation id are the same" do
+        @organisation.remote_id.should == @organisation.organisation_id
+      end
+      it "should allow you to set the remote id" do
+        @organisation.remote_id = 12
+        @organisation.organisation_id.should == 12
+      end
+      it "should know the correct remote field" do
+        @organisation.remote_id_field.should == "organisation_id"
+      end
+    end
+  
   it " should have a url base " do
     Insightly::Organisation.new.url_base.should == "Organisations"
   end

@@ -153,4 +153,110 @@ http_interactions:
         /NjcECg9P3vxexFZvvf9X/L/AJUbY5HyAQAA
     http_version: !!null 
   recorded_at: Sun, 30 Sep 2012 14:23:28 GMT
+- request:
+    method: get
+    uri: https://<API_KEY>:@api.insight.ly/v1/Tasks/3376047
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Encoding:
+      - gzip
+      Expires:
+      - '-1'
+      Vary:
+      - Accept-Encoding
+      Server:
+      - Microsoft-IIS/7.5
+      Date:
+      - Sun, 30 Sep 2012 15:09:46 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAEAO29B2AcSZYlJi9tynt/SvVK1+B0oQiAYBMk2JBAEOzBiM3m
+        kuwdaUcjKasqgcplVmVdZhZAzO2dvPfee++999577733ujudTif33/8/XGZk
+        AWz2zkrayZ4hgKrIHz9+fB8/In7xR2+OX/9ev//Z048e3bv34NOd/Qejj96c
+        vXl++tGjj3Z2dtI3edOmb7Lmbbq3s7u3vfNw+97OR6OPTo7fnH7+5avfh19c
+        rsty9NHTr05//6f0sfn75MsvXj4/fXP6lD/9/b96c0IgHZB0d//RvYePdg8I
+        2suvnjw/O3n++/z+P3n2+uwJ+j7Pyib3YHz0qK3X9MHLV19+5/Tkjd/t6Zvj
+        s+evzZ+v3xy/+Yr++uikWqzKvM1ngP/q7MtXZ29+H9Po5emrk9MXb35/A/6j
+        R7s7O/zuqzeMLb3vYbqz84j/R5COX78++/wFjenJ7/P7f/X69JWHyMvjV4Bp
+        ySmfvjp9/fLLFzwq98K9/YcPPh199OV3X9AH3U/R/+9/8uqUfjzdSDVu+NVL
+        /NjcECg9P3vxexFZvvf9X/L/ANztdIPyAQAA
+    http_version: !!null 
+  recorded_at: Sun, 30 Sep 2012 15:09:47 GMT
+- request:
+    method: get
+    uri: https://<API_KEY>:@api.insight.ly/v1/Tasks/3376047
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Encoding:
+      - gzip
+      Expires:
+      - '-1'
+      Vary:
+      - Accept-Encoding
+      Server:
+      - Microsoft-IIS/7.5
+      Date:
+      - Sun, 30 Sep 2012 15:09:47 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAEAO29B2AcSZYlJi9tynt/SvVK1+B0oQiAYBMk2JBAEOzBiM3m
+        kuwdaUcjKasqgcplVmVdZhZAzO2dvPfee++999577733ujudTif33/8/XGZk
+        AWz2zkrayZ4hgKrIHz9+fB8/In7xR2+OX/9ev//Z048e3bv34NOd/Qejj96c
+        vXl++tGjj3Z2dtI3edOmb7Lmbbq3s7u3vfNw+97OR6OPTo7fnH7+5avfh19c
+        rsty9NHTr05//6f0sfn75MsvXj4/fXP6lD/9/b96c0IgHZB0d//RvYePdg8I
+        2suvnjw/O3n++/z+P3n2+uwJ+j7Pyib3YHz0qK3X9MHLV19+5/Tkjd/t6Zvj
+        s+evzZ+v3xy/+Yr++uikWqzKvM1ngP/q7MtXZ29+H9Po5emrk9MXb35/A/6j
+        R7s7O/zuqzeMLb3vYbqz84j/R5COX78++/wFjenJ7/P7f/X69JWHyMvjV4Bp
+        ySmfvjp9/fLLFzwq98K9/YcPPh199OV3X9AH3U/R/+9/8uqUfjzdSDVu+NVL
+        /NjcECg9P3vxexFZvvf9X/L/ANztdIPyAQAA
+    http_version: !!null 
+  recorded_at: Sun, 30 Sep 2012 15:09:48 GMT
 recorded_with: VCR 2.2.5

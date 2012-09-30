@@ -1,0 +1,61 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://<API_KEY>:@api.insight.ly/v1/Users
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Encoding:
+      - gzip
+      Expires:
+      - '-1'
+      Vary:
+      - Accept-Encoding
+      Server:
+      - Microsoft-IIS/7.5
+      Date:
+      - Sun, 30 Sep 2012 15:06:36 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAEAO29B2AcSZYlJi9tynt/SvVK1+B0oQiAYBMk2JBAEOzBiM3m
+        kuwdaUcjKasqgcplVmVdZhZAzO2dvPfee++999577733ujudTif33/8/XGZk
+        AWz2zkrayZ4hgKrIHz9+fB8/Ir73iz/66vXpq9//7OlHj+7tP3zw6eijky9f
+        vDk+ecMf7T18cP/Tg3ujj56dvXr95vd/cfzF6UePPnpVLT8affT82H1yki1W
+        k7ws6eM3Z1+c/tSXL075/Y9O8mVbZ2X6us2Ws6yepW+KRU6tTr84Pnv++x8/
+        ffrq9PVraldXy9+z3vt0Np5WC/r6+OkXZy/OXr95dfzmy1cfPWrrdU4fnpx8
+        +dWLN7//l999cUofnmdlw5++OftJwkHaPD1+c/r7n7w6pR9Pf/+v3pwQ6L2d
+        3Z3t3b3tvQfpzv6jvb1HOzvUAzf86iV+bGr4S0YdAh1ECPRwp0OgeV6uqA+f
+        Qtl0Wq2XLX369QgEkBsoZImxiUT6J8a8kUb7PHRtuIlG0jCk0f2dTx90aXSw
+        t/twv0Oj47LMb81Gp1nT5vXyRiplALqBTMIkm6kkbTDoYSLtfvpol8euDQeJ
+        ZBsGRNrb/fTgARHEp9LuwcHB/YP9vS6ZFtkPeuL2+h59EFLotnyUMbzmnhIp
+        RiRLj01U0j8x7D6Z9rZ3Hmzv0uj3Hu3vP9rZoz64YY9MvYZ9Mt2Pkek+iWFA
+        pjfVbEa9+EQ6bZr8HX0W0um2nNQSwA+l0SZO8kf+6aP7D6gLbriRRNwwJNHe
+        p3sPuvJGL+3vPXjYIdHTon5LvQQkKhf5clbV5/R5SKbbstOMgG4gk1CgQyXz
+        4a2I9HB7Zz/dfUB65dG9YXHrNfwl3/9/ACcryLnaBgAA
+    http_version: !!null 
+  recorded_at: Sun, 30 Sep 2012 15:06:38 GMT
+recorded_with: VCR 2.2.5

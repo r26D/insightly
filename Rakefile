@@ -22,8 +22,14 @@ end
 desc "Push the gem out to rubygems"
 task :push_gem => :gem do 
   system "gem push insightly-#{Insightly::Version::String}.gem"
+  Rake::Task[:tag_version].invoke
 end
 
+desc "Tags the current version of the code"
+task :tag_version do
+  system "git tag -a v#{Insightly::Version::String} -m 'Version #{Insightly::Version::String} Published #{Date.today.strftime("%b/%d/%Y")}' "
+  system "git push origin --tags"
+end
 
 desc 'Cleans generated files'
 task :clean do

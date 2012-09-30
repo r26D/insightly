@@ -37,11 +37,6 @@ module Insightly
               "RESPONSIBLE_USER_ID",
               "OPPORTUNITY_DETAILS"
 
-
-    def remote_id
-      opportunity_id
-    end
-
     def tasks
       list = []
       Insightly::TaskLink.search_by_opportunity_id(opportunity_id).each do |x|

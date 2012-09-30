@@ -1,0 +1,47 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://<API_KEY>:@api.insight.ly/v1/Organisations
+    body:
+      encoding: ASCII-8BIT
+      string: ! '{"VISIBLE_TO":"OWNER","ORGANISATION_NAME":"000 Test Org 2012-09-30"}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '68'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json; charset=utf-8
+      Expires:
+      - '-1'
+      Location:
+      - https://api.insight.ly/v1/Organisations/9304205
+      Server:
+      - Microsoft-IIS/7.5
+      Date:
+      - Sun, 30 Sep 2012 14:28:56 GMT
+    body:
+      encoding: US-ASCII
+      string: ! '{"ORGANISATION_ID":9304205,"ORGANISATION_NAME":"000 Test Org 2012-09-30","BACKGROUND":null,"IMAGE_URL":null,"ORGANISATION_FIELD_1":null,"ORGANISATION_FIELD_2":null,"ORGANISATION_FIELD_3":null,"ORGANISATION_FIELD_4":null,"ORGANISATION_FIELD_5":null,"ORGANISATION_FIELD_6":null,"ORGANISATION_FIELD_7":null,"ORGANISATION_FIELD_8":null,"ORGANISATION_FIELD_9":null,"ORGANISATION_FIELD_10":null,"OWNER_USER_ID":226277,"DATE_CREATED_UTC":"2012-09-30
+        14:28:56","DATE_UPDATED_UTC":"2012-09-30 14:28:56","ADDRESSES":[],"CONTACTINFOS":[],"DATES":[],"TAGS":[],"LINKS":[],"ORGANISATIONLINKS":[],"EMAILLINKS":null,"VISIBLE_TO":"OWNER","VISIBLE_TEAM_ID":null,"VISIBLE_USER_IDS":null}'
+    http_version: !!null 
+  recorded_at: Sun, 30 Sep 2012 14:28:58 GMT
+recorded_with: VCR 2.2.5

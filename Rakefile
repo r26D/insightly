@@ -6,6 +6,7 @@ require File.dirname(__FILE__) + "/lib/insightly/version.rb"
 
 task :default => :spec
 
+desc "Opens a dev console"
 task :dev_console do
   sh "irb -I lib -rubygems -r insightly"
 end

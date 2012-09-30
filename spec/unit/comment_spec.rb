@@ -93,8 +93,11 @@ describe Insightly::Comment do
   end
 
   it "should allow you to modify a comment" do
-    VCR.use_cassette('create and modify comment') do
+    VCR.use_cassette('first insightly user') do
       @user = Insightly::User.all.first
+    end
+    VCR.use_cassette('create and modify comment') do
+
 
       @task = Insightly::Task.new
       @task.title = "000 Test Task"

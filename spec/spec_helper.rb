@@ -20,7 +20,7 @@ VCR.configure do |c|
   c.hook_into :webmock
   c.default_cassette_options = {:record => :new_episodes} # :new_episodes, :none, :all
   c.ignore_localhost = true
- # c.allow_http_connections_when_no_cassette = true
+  #c.allow_http_connections_when_no_cassette = true
   c.filter_sensitive_data('<API_KEY>') { INSIGHTLY_API_KEY }
 end
 

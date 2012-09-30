@@ -61,12 +61,7 @@ module Insightly
     end
 
 
-    def remote_id
-      task_id
-    end
-
     def fix_for_link(link)
-      #This needs to auto set the org id on the item
       link.task_id = self.remote_id
       link
     end

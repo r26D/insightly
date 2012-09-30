@@ -1,0 +1,50 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://<API_KEY>:@api.insight.ly/v1/Tasks
+    body:
+      encoding: ASCII-8BIT
+      string: ! '{"STATUS":"Completed","RESPONSIBLE_USER_ID":34976,"OWNER_USER_ID":34976,"TITLE":"000
+        Test Task 2012-09-30"}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '107'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json; charset=utf-8
+      Expires:
+      - '-1'
+      Location:
+      - https://api.insight.ly/v1/Tasks/3376047
+      Server:
+      - Microsoft-IIS/7.5
+      Date:
+      - Sun, 30 Sep 2012 14:32:06 GMT
+    body:
+      encoding: US-ASCII
+      string: ! '{"TASK_ID":3376047,"TITLE":"000 Test Task 2012-09-30","CATEGORY_ID":null,"DUE_DATE":null,"COMPLETED_DATE_UTC":"2012-09-30
+        14:32:06","PUBLICLY_VISIBLE":false,"COMPLETED":true,"PROJECT_ID":null,"DETAILS":null,"STATUS":"Completed","PRIORITY":null,"PERCENT_COMPLETE":100,"START_DATE":"2012-09-30
+        00:00:00","ASSIGNED_BY_USER_ID":null,"PARENT_TASK_ID":null,"RESPONSIBLE_USER_ID":34976,"OWNER_USER_ID":34976,"DATE_CREATED_UTC":"2012-09-30
+        14:32:06","DATE_UPDATED_UTC":"2012-09-30 14:32:06","TASKLINKS":[]}'
+    http_version: !!null 
+  recorded_at: Sun, 30 Sep 2012 14:32:07 GMT
+recorded_with: VCR 2.2.5

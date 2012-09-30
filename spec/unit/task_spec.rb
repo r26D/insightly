@@ -1,10 +1,12 @@
 require File.expand_path(File.dirname(__FILE__) + "/../spec_helper")
-#METODO Convert to VCR
 
 describe Insightly::Task do
   before(:each) do
     Insightly::Configuration.api_key = INSIGHTLY_API_KEY
     Insightly::Configuration.logger = Insightly::Configuration._debug_logger
+    VCR.use_cassette('first insightly user') do
+      @user = Insightly::User.all.first
+    end
     @task = Insightly::Task.new.build({
                                           "TASKLINKS" => {"OPPORTUNITY_ID" => 955454,
                                                           "TASK_LINK_ID" => 2744236,
@@ -34,6 +36,29 @@ describe Insightly::Task do
 
     # @task = Insightly::Task.new(3216775)
   end
+  context "remote id" do
+    it "should know if the remote id is set" do
+      @task.remote_id = nil
+      @task.remote_id?.should be_false
+      @task.remote_id = ""
+      @task.remote_id?.should be_false
+      @task.remote_id = 1
+      @task.remote_id?.should be_true
+      @task.remote_id = "1"
+      @task.remote_id?.should be_true
+    end
+    it "should know that the remote id and the task id are the same" do
+      @task.remote_id.should == @task.task_id
+    end
+    it "should allow you to set the remote id" do
+      @task.remote_id = 12
+      @task.task_id.should == 12
+    end
+    it "should know the correct remote field" do
+      @task.remote_id_field.should == "task_id"
+    end
+  end
+
   it "should be able to create a task" do
   end
   it "should have a url base" do
@@ -42,10 +67,7 @@ describe Insightly::Task do
   it "should know the task id" do
     @task.task_id.should == 3216775
   end
-  it "should know that the remote id and the task id are the same" do
-    @task.remote_id.should == @task.task_id
-  end
-  it "should allow you to load based on an id"
+
   it "should allow you to build an object from a hash" do
     task = Insightly::Task.new.build({"TITLE" => "Other"})
     task.remote_data.should == {"TITLE" => "Other"}
@@ -55,7 +77,7 @@ describe Insightly::Task do
   end
   context "comments" do
     before(:each) do
-      #@task = Insightly::Task.new(3216775)
+
       @comment = Insightly::Comment.new.build({
                                                   "COMMENT_ID" => 132456,
                                                   "BODY" => "test comment",
@@ -133,106 +155,222 @@ describe Insightly::Task do
 
 
   end
-  it "should be able to link a task to an opportunity" do
-    @opportunity = Insightly::Opportunity.build({
+  it "should be able to load a task from a id" do
 
-                                                    "VISIBLE_TO" => "EVERYONE",
-                                                    "BID_TYPE" => "Fixed Bid",
-                                                    "ACTUAL_CLOSE_DATE" => nil,
-                                                    "BID_CURRENTY" => "USD",
-                                                    "OPPORTUNITY_STATE" => "Open",
-                                                    "OPPORTUNITY_NAME" => "Linkable Opportunity",
-                                                    "OPPORTUNITY_DETAILS" => "This is a description."
-                                                })
-
-    @task = Insightly::Task.new.build({
-
-
-                                            "PUBLICLY_VISIBLE" => true,
-                                            "RESPONSIBLE_USER_ID" => "226277" ,
-                                                "OWNER_USER_ID" =>  "226277"   ,
-                                            "DETAILS" => "This proves we can link them",
-
-                                            "TITLE" => "Linkable Task"
+    VCR.use_cassette('load task by id') do
+      @task = Insightly::Task.new.build({"STATUS" => "Completed",
+                                         "RESPONSIBLE_USER_ID" => @user.user_id,
+                                         "OWNER_USER_ID" => @user.user_id,
+                                         "TITLE" => "000 Test Task #{Date.today}"
                                         })
-   # @opportunity.save
-    @opportunity = Insightly::Opportunity.new(968613)
-    @task.save
-    #"TASKLINKS" => {"OPPORTUNITY_ID" => 955454,
-    #                                                         "TASK_LINK_ID" => 2744236,
-    #                                                        "PROJECT_ID" => nil,
-    #                                                        "CONTACT_ID" => nil,
-    #                                                        "TASK_ID" => nil,
-    #                                                        "ORGANIZATION_ID" => nil
-    #                                                                           },
-    @task_link = Insightly::TaskLink.build("OPPORTUNITY_ID" => @opportunity.opportunity_id.to_s,
-                                           "TASK_ID" => @task.task_id.to_s
-                                          )
-    @task.tasklinks = [@task_link.remote_data]
-    @task.save
+      @task.save
+      @task.reload
+      @alt_task = Insightly::Task.new(@task.remote_id)
+    end
+    @alt_task.should == @task
+  end
+  context "link to an opportunity" do
+    before(:each) do
+
+
+      @opportunity = Insightly::Opportunity.build({
+
+                                                      "VISIBLE_TO" => "OWNER",
+                                                      "BID_TYPE" => "Fixed Bid",
+                                                      "ACTUAL_CLOSE_DATE" => nil,
+                                                      "BID_CURRENTY" => "USD",
+                                                      "OPPORTUNITY_STATE" => "Suspended",
+                                                      "OPPORTUNITY_NAME" => "000 Test Opportunity #{Date.today}"
+
+                                                  })
+
+      @task = Insightly::Task.new.build({"STATUS" => "Completed",
+                                         "RESPONSIBLE_USER_ID" => @user.user_id,
+                                         "OWNER_USER_ID" => @user.user_id,
+                                         "TITLE" => "000 Test Task #{Date.today}"
+                                        })
+    end
+    it "should be able to fetch the list of opportunity ids" do
+      @opportunity.opportunity_id = 100
+      @task.remote_id = 200
+      @task.opportunity_ids.should == []
+      @task.add_task_link(Insightly::TaskLink.add_opportunity(100))
+      @task.add_task_link(Insightly::TaskLink.add_contact(200))
+      @task.opportunity_ids.should == [100]
+    end
+    it "should be able to fetch the list of opportunities" do
+      @task.remote_id = 200
+      @task.opportunities.should == []
+      @opportunity.opportunity_id = 100
+      @task.add_task_link(Insightly::TaskLink.add_opportunity(100))
+      @task.add_task_link(Insightly::TaskLink.add_contact(200))
+      Insightly::Opportunity.should_receive(:new).with(100).and_return(@opportunity)
+      @task.opportunities.should == [@opportunity]
+    end
+    context "with an opportunity object" do
+      it "should be able to link to a task" do
+        VCR.use_cassette('add an opportunity to a task with object') do
+          @task.add_opportunity(@opportunity)
+          @task.reload
+          @opportunity.reload
+          @task.opportunities.should == [@opportunity]
+        end
+      end
+
+      it "should not pre-save the task if it has an id" do
+        @task.task_id = 100
+        @task.should_not_receive(:save)
+        @opportunity.stub(:save)
+        @task.add_opportunity(@opportunity)
+      end
+      it "should save the task before linking if it has never been saved" do
+        @task.task_id.should be_nil
+        @task.should_receive(:save).twice  do
+          @task.remote_id = 200
+        end
+        @opportunity.remote_id = 100
+        @opportunity.stub(:save)
+        @task.add_opportunity(@opportunity)
+      end
+      it "should save the opportunity before linking if it has never been saved" do
+        @task.stub(:save)
+        @opportunity.opportunity_id.should be_nil
+        @opportunity.should_receive(:save)
+        @task.add_opportunity(@opportunity)
+      end
+      it "should not pre-save the opportunity if it has an id" do
+        @task.task_id = 100
+        @task.stub(:save)
+        @opportunity.opportunity_id = 100
+        @opportunity.should_not_receive(:save)
+        @task.add_opportunity(@opportunity)
+      end
+    end
+    context "with an opportunity id" do
+      it "should be able to link to a task" do
+        VCR.use_cassette('add an opportunity to a task by id') do
+          @opportunity.save
+          @task.add_opportunity_id(@opportunity.opportunity_id)
+        end
+        @task.opportunity_ids.should == [@opportunity.opportunity_id]
+      end
+      it "should not do anything if the opportunity is nil" do
+        @task.add_opportunity_id(nil).should be_false
+      end
+
+      it "should save the task before linking if it has never been saved" do
+        @task.task_id.should be_nil
+        @task.should_receive(:save).twice do
+          @task.remote_id = 200
+        end
+        org = mock
+
+        Insightly::Organisation.stub(:new).with(100).and_return(org)
+        @task.add_opportunity_id(100)
+      end
+
+    end
+
   end
 
-  context "TaskLinks" do
-     before(:each) do
-      # @task = Insightly::Task.new(3263739)
-        @task = Insightly::Task.new
-       @task.task_links = []
-      # @task.save
- 
- 
-       @link = Insightly::TaskLink.add_organisation(8936117)
-       @link2 = Insightly::TaskLink.add_opportunity(968613)
-     end
-     it "should allow you to try to set it to nil" do
-       @task = Insightly::Task.new
-       @task.task_links = nil
-       @task.task_links.should == []
-     end
-     it "should allow you to update an link" do
-       @task.task_links.should == []
-       @task.add_task_link(@link)
- 
-       @task.save
-       @link = @task.task_links.first
-       @link2.task_link_id = @link.task_link_id
-       @task.task_links = [@link2]
-       @task.save
-       @task.reload
-       @task.task_links.length.should == 1
-       @task.task_links.first.opportunity_id.should == 968613
-     end
-     it "should allow you to add an link" do
- 
- 
-       @task.task_links.should == []
-       @task.add_task_link(@link)
 
-       @task.save
-       @task.reload
-       @task.task_links.length.should == 1
-       @task.task_links.first.organisation_id.should == 8936117
-     end
-     it "should allow you to remove an link" do
- 
-       @task.task_links.should == []
-       @task.add_task_link(@link)
- 
-       @task.save
-       @task.task_links = []
-       @task.save
-       @task.reload
-       @task.task_links.length.should == 0
- 
-     end
-     it "should allow you to clear all links" do
-       @task.task_links.should == []
-       @task.add_task_link(@link)
- 
-       @task.save
-       @task.task_links = []
-       @task.save
-       @task.reload
-       @task.task_links.length.should == 0
-     end
-   end
+  context "TaskLinks" do
+    before(:each) do
+
+
+      VCR.use_cassette('simple task') do
+        @task = Insightly::Task.new.build({"STATUS" => "Completed",
+                                           "RESPONSIBLE_USER_ID" => @user.user_id,
+                                           "OWNER_USER_ID" => @user.user_id,
+                                           "TITLE" => "000 Test Task #{Date.today}"
+                                          })
+        @task.save
+      end
+      @task.task_links.should == []
+      VCR.use_cassette('organisation task link') do
+        @organisation = Insightly::Organisation.build({
+                                                          "VISIBLE_TO" => "OWNER",
+                                                          "ORGANISATION_NAME" => "000 Test Org #{Date.today}"
+                                                      })
+        @organisation.save
+        @link = Insightly::TaskLink.add_organisation(@organisation.remote_id)
+      end
+      VCR.use_cassette('opportunity task link') do
+        @opportunity = Insightly::Opportunity.build({
+
+                                                        "VISIBLE_TO" => "OWNER",
+                                                        "BID_TYPE" => "Fixed Bid",
+                                                        "ACTUAL_CLOSE_DATE" => nil,
+                                                        "BID_CURRENTY" => "USD",
+                                                        "OPPORTUNITY_STATE" => "Suspended",
+                                                        "OPPORTUNITY_NAME" => "000 Test Opportunity #{Date.today}"
+
+                                                    })
+        @opportunity.save
+        @link2 = Insightly::TaskLink.add_opportunity(@opportunity.remote_id)
+      end
+    end
+    it "should allow you to try to set it to nil" do
+      @task = Insightly::Task.new
+      @task.task_links = nil
+      @task.task_links.should == []
+    end
+    it "should raise an error if you try to add a link but have not saved" do
+      @task = Insightly::Task.new
+      expect { @task.add_task_link(@link) }.to raise_error(ScriptError, "You must save the Insightly::Task before adding a link.")
+    end
+    it "should allow you to update an link" do
+      VCR.use_cassette('update task link for simple task') do
+        @task.task_links.should == []
+        @task.add_task_link(@link)
+
+        @task.save
+        @link = @task.task_links.first
+        @link2.task_link_id = @link.task_link_id
+        @task.task_links = [@link2]
+        @task.save
+        @task.reload
+        @task.task_links.length.should == 1
+        @task.task_links.first.opportunity_id.should == @opportunity.remote_id
+      end
+
+    end
+    it "should allow you to add an link" do
+
+      VCR.use_cassette('add task link to simple task') do
+        @task.task_links.should == []
+        @task.add_task_link(@link)
+
+        @task.save
+        @task.reload
+        @task.task_links.length.should == 1
+        @task.task_links.first.organisation_id.should == @organisation.remote_id
+      end
+    end
+    it "should allow you to remove an link" do
+      VCR.use_cassette('remove task link from simple task') do
+        @task.task_links.should == []
+        @task.add_task_link(@link)
+
+        @task.save
+        @task.task_links = []
+        @task.save
+        @task.reload
+        @task.task_links.length.should == 0
+      end
+
+    end
+    it "should allow you to clear all links" do
+      VCR.use_cassette('clear task links for simple task') do
+        @task.task_links.should == []
+        @task.add_task_link(@link)
+
+        @task.save
+        @task.task_links = []
+        @task.save
+        @task.reload
+        @task.task_links.length.should == 0
+      end
+    end
+  end
 end

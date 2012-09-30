@@ -15,7 +15,7 @@ module Insightly
   class Base
 
     class << self
-      attr_accessor :api_fields,:url_base
+      attr_accessor :api_fields, :url_base, :remote_id_field
     end
     self.api_fields = []
 
@@ -59,8 +59,22 @@ module Insightly
     def url_base
       self.class.url_base
     end
+
+    def remote_id_field
+      return self.class.remote_id_field if self.class.remote_id_field
+      self.class.to_s.downcase.gsub("insightly::", "") + "_id"
+    end
+
     def remote_id
-      raise ScriptError, "This should be overridden in the subclass"
+      self.send(remote_id_field.to_sym)
+    end
+
+    def remote_id=(value)
+      self.send("#{remote_id_field}=", value)
+    end
+
+    def remote_id?
+      self.remote_id.nil? || self.remote_id.to_s.empty? ? false : true
     end
 
     def load(id)
@@ -71,9 +85,11 @@ module Insightly
     def reload
       load(remote_id)
     end
+
     def to_json
-       @data.to_json
-     end
+      @data.to_json
+    end
+
     def build(data)
       @data = data
       self

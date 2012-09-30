@@ -82,8 +82,28 @@ describe Insightly::Opportunity do
   it "should know the opportunity id" do
     @opportunity.opportunity_id.should == 957168
   end
-  it "should know that the remote id and the opportunity id are the same" do
-    @opportunity.remote_id.should == @opportunity.opportunity_id
+
+  context "remote id" do
+    it "should know if the remote id is set" do
+      @opportunity.remote_id = nil
+      @opportunity.remote_id?.should be_false
+      @opportunity.remote_id = ""
+      @opportunity.remote_id?.should be_false
+      @opportunity.remote_id = 1
+      @opportunity.remote_id?.should be_true
+      @opportunity.remote_id = "1"
+      @opportunity.remote_id?.should be_true
+    end
+    it "should know that the remote id and the opportunity id are the same" do
+      @opportunity.remote_id.should == @opportunity.opportunity_id
+    end
+    it "should allow you to set the remote id" do
+      @opportunity.remote_id = 12
+      @opportunity.opportunity_id.should == 12
+    end
+    it "should know the correct remote field" do
+      @opportunity.remote_id_field.should == "opportunity_id"
+    end
   end
   it "should allow you to load based on an id"
   it "should allow you to build an object from a hash" do

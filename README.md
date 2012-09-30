@@ -6,6 +6,11 @@ This is a rest client library to handle talking to http://Insight.ly
 The official API for Insigh.ly was released on August 12, 2012.  This library is in the very early stages of implementing access to everything expose in
 that API.  The focus is primarily on opportunities and tasks.
 
+Freedom isn't Free - Neither is the API
+===========
+
+You have to be a paying customer of Insight.ly to use the API. If you are on a free plan, then it will give you 401 errors when you try to do anything with the API
+
 Getting Started
 =========
 

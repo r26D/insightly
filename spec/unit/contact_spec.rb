@@ -65,14 +65,19 @@ describe Insightly::Contact do
   context "connections" do
     before(:each) do
 
+      VCR.use_cassette('create connectable contact') do
+        @contact = Insightly::Contact.new
+        @contact.first_name = "00 Test"
+        @contact.last_name = "Contact"
+        @contact.visible_to = "Owner"
 
-      @contact = Insightly::Contact.new(20315449)
 
-      @contact.contact_infos = []
-      @contact.links = []
-      @contact.tags = []
-      @contact.addresses = []
-      @contact.save
+        @contact.contact_infos = []
+        @contact.links = []
+        @contact.tags = []
+        @contact.addresses = []
+        @contact.save
+      end
     end
 
 
@@ -89,63 +94,70 @@ describe Insightly::Contact do
         @address.country = "US"
       end
       it "should allow you to update an address" do
-        @contact.addresses.should == []
-        @contact.add_address(@address)
+        VCR.use_cassette('update address for contact') do
+          @contact.addresses.should == []
+          @contact.add_address(@address)
 
-        @contact.save
-        @address = @contact.addresses.first
-        @address.state = "TX"
-        @contact.addresses = [@address]
-        @contact.addresses.length.should == 1
+          @contact.save
+          @address = @contact.addresses.first
+          @address.state = "TX"
+          @contact.addresses = [@address]
+          @contact.addresses.length.should == 1
 
-        @contact.save
+          @contact.save
 
-        @contact.reload
+          @contact.reload
 
-        @contact.addresses.length.should == 1
-        @contact.addresses.first.state.should == "TX"
+          @contact.addresses.length.should == 1
+          @contact.addresses.first.state.should == "TX"
+        end
+
       end
       it "should allow you to add an address" do
+        VCR.use_cassette('add address to contact') do
 
+          @contact.addresses.should == []
+          @contact.add_address(@address)
 
-        @contact.addresses.should == []
-        @contact.add_address(@address)
-
-        @contact.save
-        @contact.reload
-        @contact.addresses.length.should == 1
-        @contact.addresses.first.street.should == "123 Main St"
+          @contact.save
+          @contact.reload
+          @contact.addresses.length.should == 1
+          @contact.addresses.first.street.should == "123 Main St"
+        end
       end
       it "should allow you to remove an address" do
+        VCR.use_cassette('remove address from contact') do
+          @contact.addresses.should == []
+          @contact.add_address(@address)
 
-        @contact.addresses.should == []
-        @contact.add_address(@address)
-
-        @contact.save
-        @contact.addresses = []
-        @contact.save
-        @contact.reload
-        @contact.addresses.length.should == 0
-
+          @contact.save
+          @contact.addresses = []
+          @contact.save
+          @contact.reload
+          @contact.addresses.length.should == 0
+        end
       end
       it "should allow you to clear all addresses" do
-        @contact.addresses.should == []
-        @contact.add_address(@address)
+        VCR.use_cassette('clear address from contact') do
+          @contact.addresses.should == []
+          @contact.add_address(@address)
 
-        @contact.save
-        @contact.addresses = []
-        @contact.save
-        @contact.reload
-        @contact.addresses.length.should == 0
+          @contact.save
+          @contact.addresses = []
+          @contact.save
+          @contact.reload
+          @contact.addresses.length.should == 0
+        end
       end
 
       it "should not add an address if the same address is already on the organization" do
+        VCR.use_cassette('only add an addres once to a contact') do
+          @contact.addresses.should == []
+          @contact.add_address(@address)
 
-        @contact.addresses.should == []
-        @contact.add_address(@address)
-
-        @contact.add_address(@address)
-        @contact.addresses.length.should == 1
+          @contact.add_address(@address)
+          @contact.addresses.length.should == 1
+        end
       end
     end
     context "contact_infos" do

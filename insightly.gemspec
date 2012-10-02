@@ -4,7 +4,7 @@ require 'insightly/version'
 Gem::Specification.new do |s|
   s.name = "insightly"
   s.summary = "Insight.ly Ruby Client Library"
-  s.description = "Ruby library for integrating with http://Insight.ly . This gem makes it easy to talk to their recently released REST API."
+  s.description = "Ruby library for integrating with http://Insight.ly . This gem makes it easy to talk to their recently released REST API.  This includes dealing with Contacts, Opportunities, Organisations, and Tasks. It was originally develped for http://www.truckingoffice.com"
   s.version = Insightly::Version::String
   s.authors = ["Dirk Elmendorf","r26D"]
   s.email = "code@r26d.com"

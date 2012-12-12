@@ -1,5 +1,5 @@
 module Insightly
-  class Project < Base
+  class Project < ReadWrite
     self.url_base = "Projects"    
     api_field "PROJECT_ID",
       "PROJECT_NAME",

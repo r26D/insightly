@@ -18,7 +18,7 @@ module Insightly
       @data
     end
     def process(result, content_type)
-      puts result
+      #puts result
       if content_type == :json
         JSON.parse(result.to_str)
       elsif content_type == :xml

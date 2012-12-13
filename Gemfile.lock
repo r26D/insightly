@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    insightly (0.2.9)
+    insightly (0.2.10)
       activesupport (> 3)
       builder (>= 2.0.0)
       i18n (> 0)

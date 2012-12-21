@@ -59,7 +59,7 @@ module Insightly
 
     def base_insightly_class
       self.class.ancestors.select do |anc|
-        anc.name.deconstantize == "Insightly"
+        anc.name.split("::").first == "Insightly"
       end.first
     end
 

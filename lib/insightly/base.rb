@@ -25,11 +25,11 @@ module Insightly
         next if method.nil? or method == ""
         method_name = method.to_s.downcase.to_sym
         send :define_method, method_name do
-          @data["#{self.class.const_get(:CUSTOM_FIELD_PREFIX)}_#{index+1}"]
+          @data["#{base_insightly_class.const_get(:CUSTOM_FIELD_PREFIX)}_#{index+1}"]
         end
         method_name = "#{method.to_s.downcase}=".to_sym
         send :define_method, method_name do |value|
-          @data["#{self.class.const_get(:CUSTOM_FIELD_PREFIX)}_#{index+1}"] = value
+          @data["#{base_insightly_class.const_get(:CUSTOM_FIELD_PREFIX)}_#{index+1}"] = value
         end
       end
     end
@@ -57,14 +57,20 @@ module Insightly
       load(id) if id
     end
 
+    def base_insightly_class
+      self.class.ancestors.select do |anc|
+        anc.name.deconstantize == "Insightly"
+      end.first
+    end
 
     def url_base
-      self.class.url_base
+      base_insightly_class.url_base
     end
 
     def remote_id_field
-      return self.class.remote_id_field if self.class.remote_id_field
-      self.class.to_s.downcase.gsub("insightly::", "") + "_id"
+      return base_insightly_class.remote_id_field if base_insightly_class.remote_id_field
+
+      base_insightly_class.name.demodulize.downcase + "_id"
     end
 
     def remote_id

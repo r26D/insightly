@@ -1,3 +1,4 @@
+#METODO Migrate over to jewlerhttps://github.com/technicalpickles/jeweler
 #METODO need to be able to delete records
 #METODO create a script that can talk to the remote insightly install and confirm that everything still workd
 #METODO re-write all the tests so that they store local data to work against

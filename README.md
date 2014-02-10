@@ -1,15 +1,16 @@
 insightly
 =========
 
-This is a rest client library to handle talking to http://Insight.ly
+This is a rest client library to handle talking to http://Insight.ly V1.
+
+This project was originally developed to talk to the v1 version of Insight.ly's API.  It looks like Insight.ly has released v2 of their API.  We moved to a different CRM so this project isn't going to be updated. 
+
+
+
 
 The official API for Insigh.ly was released on August 12, 2012.  This library is in the very early stages of implementing access to everything expose in
 that API.  The focus is primarily on opportunities and tasks.
 
-Freedom isn't Free - Neither is the API
-===========
-
-You have to be a paying customer of Insight.ly to use the API. If you are on a free plan, then it will give you 401 errors when you try to do anything with the API
 
 Getting Started
 =========

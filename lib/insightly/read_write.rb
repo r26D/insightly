@@ -23,13 +23,22 @@ module Insightly
       else
         content_type = content_selector
       end
-      response = RestClient::Request.new(:method => :post,
-                                         :url => "#{config.endpoint}/#{path.to_s}",
-                                         :user => config.api_key,
-                                         :password => "",
-                                         :payload => params,
-                                         :headers => {:accept => content_type, :content_type => content_type}).execute
-      process(response, content_selector)
+
+      begin
+        url = "#{config.endpoint}/#{path.to_s}"
+
+        response = RestClient::Request.new(:method => :post,
+                                           :url => url,
+                                           :user => config.api_key,
+                                           :password => "",
+                                           :payload => params,
+                                           :headers => {:accept => content_type, :content_type => content_type}).execute
+
+        process(response, content_selector)
+      rescue => e
+        puts "failure talking to Insight.ly #{url}"
+        raise e
+      end
     end
 
     def put_collection(path, params, content_selector = :json)

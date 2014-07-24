@@ -8,8 +8,8 @@ module Insightly
      end
    end
   class Configuration
-    API_VERSION = "v1" # :nodoc:
-    DEFAULT_ENDPOINT = "https://api.insight.ly/v1" # :nodoc:
+    API_VERSION = "v2.1" # :nodoc:
+    DEFAULT_ENDPOINT = "https://api.insight.ly/v2.1" # :nodoc:
 
     class << self
       attr_writer :custom_user_agent, :endpoint, :logger, :api_key
